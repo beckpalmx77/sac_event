@@ -11,11 +11,11 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
 
     <style>
         .large-text {
-            font-size: 70px; /* ปรับขนาดตัวอักษรตามที่คุณต้องการ */
+            font-size: 25px; /* ปรับขนาดตัวอักษรตามที่คุณต้องการ */
         }
 
         .medium-text {
-            font-size: 20px; /* ปรับขนาดตัวอักษรตามที่คุณต้องการ */
+            font-size: 15px; /* ปรับขนาดตัวอักษรตามที่คุณต้องการ */
         }
 
     </style>
@@ -64,7 +64,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                         id="Text1"></p></div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fa fa-address-book fa-5x text-primary"></i>
+                                            <i class="fa fa-address-book fa-3x text-primary"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
 
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fa fa-address-book fa-5x text-success"></i>
+                                            <i class="fa fa-address-book fa-3x text-success"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                         id="Text3"></p></div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fa fa-address-book fa-5x text-danger"></i>
+                                            <i class="fa fa-address-book fa-3x text-danger"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fa fa-address-book fa-5x text-info"></i>
+                                            <i class="fa fa-address-book fa-3x text-info"></i>
                                         </div>
                                     </div>
                                 </div>
