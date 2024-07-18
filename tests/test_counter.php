@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style>
     body {
-        background: url('../img/Landing Page 1-01.png') no-repeat center center fixed;
+        background: url('../img/sac_event_img.png') no-repeat center center fixed;
         background-size: cover;
         font-family: sans-serif;
     }
