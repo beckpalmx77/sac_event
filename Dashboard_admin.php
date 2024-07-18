@@ -558,7 +558,18 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         $('#phone').val(phone);
                         $('#province_name').val(province_name);
                         $('#check_in_status').val(check_in_status);
+                        if (check_in_status==='Y')
+                        {
+                            //document.getElementById("check_in_status_display").style.color = 'green';
+                            $('#check_in_status_display').css('color', 'green');
+                        } else {
+                            //document.getElementById("check_in_status_display").style.color = 'red';
+                            $('#check_in_status_display').css('color', 'red');
+
+                        };
+
                         $('#check_in_status_display').val(check_in_status_display);
+
                         $('#attendance_qty').val(attendance_qty);
                         $('#sale_contact_name').val(sale_contact_name);
                         $('.modal-title').html("<i class='fa fa-plus'></i> Edit Record");
