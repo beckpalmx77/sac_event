@@ -313,6 +313,16 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                                                name="attendance_qty"
                                                                                placeholder="">
                                                                     </div>
+                                                                    <div class="col-sm-4">
+                                                                        <input type="hidden" id="check_in_status" name="check_in_status">
+                                                                        <label for="check_in_status_display"
+                                                                               class="control-label">สถานะการ Check In</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="check_in_status_display"
+                                                                               name="check_in_status_display"
+                                                                               readonly="true"
+                                                                               placeholder="">
+                                                                    </div>
                                                                 </div>
 
 
@@ -391,13 +401,11 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
     <script>
 
         $(document).ready(function () {
-            //GET_DATA("evs_customer", 1);
             GET_DATA("evs_event_checkin", 1);
             GET_DATA("evs_event_checkin", 2);
             GET_DATA("evs_event_checkin", 3);
 
             setInterval(function () {
-                //GET_DATA("evs_customer", 1);
                 GET_DATA("evs_event_checkin", 1);
                 GET_DATA("evs_event_checkin", 2);
                 GET_DATA("evs_event_checkin", 3);
@@ -532,6 +540,8 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         let cust_name_6 = response[i].cust_name_6;
                         let phone = response[i].phone;
                         let province_name = response[i].province_name;
+                        let check_in_status = response[i].check_in_status;
+                        let check_in_status_display = response[i].check_in_status==="Y" ? "Check In แล้ว" : "ยังไม่ได้ Check In";
                         let attendance_qty = response[i].attendance_qty;
                         let sale_contact_name = response[i].sale_contact_name;
 
@@ -547,6 +557,8 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         $('#cust_name_6').val(cust_name_6);
                         $('#phone').val(phone);
                         $('#province_name').val(province_name);
+                        $('#check_in_status').val(check_in_status);
+                        $('#check_in_status_display').val(check_in_status_display);
                         $('#attendance_qty').val(attendance_qty);
                         $('#sale_contact_name').val(sale_contact_name);
                         $('.modal-title').html("<i class='fa fa-plus'></i> Edit Record");

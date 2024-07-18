@@ -87,29 +87,20 @@ if ($_POST["action"] === 'GET_CUSTOMER_CHECKIN') {
     $rowperpage = $_POST['length']; // Rows display per page
     $columnIndex = $_POST['order'][0]['column']; // Column index
     $columnName = $_POST['columns'][$columnIndex]['data']; // Column name
-    //$columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
     $columnSortOrder = 'desc'; // asc or desc
     $searchValue = $_POST['search']['value']; // Search value
 
     $searchArray = array();
 
-    $search_province = $_POST['search_province'];
-    $search_name = $_POST['search_name'];
-    $search_contact = $_POST['search_contact'];
-
-    /*
-        $txt = $search_province . " | " . $search_name . " | " . $search_contact;
-        $my_file = fopen("search_cond.txt", "w") or die("Unable to open file!");
-        fwrite($my_file, $txt);
-        fclose($my_file);
-    */
+/*
+    $txt = $search_province . " | " . $search_name . " | " . $search_contact;
+    $my_file = fopen("search_cond.txt", "w") or die("Unable to open file!");
+    fwrite($my_file, $txt);
+    fclose($my_file);
+*/
 
 ## Search
     $searchQuery = " ";
-    //if ($_POST["page_manage"]!=="ADMIN") {
-    //$searchQuery = " AND cust_id = '" . $_SESSION['cust_id'] . "'";
-    //}
-
     if ($searchValue != '') {
         $searchQuery = " AND (ar_name LIKE :ar_name or cust_name_1 LIKE :cust_name_1 or
         phone LIKE :phone or province_name LIKE :province_name or sale_contact_name LIKE :sale_contact_name) ";
@@ -123,26 +114,25 @@ if ($_POST["action"] === 'GET_CUSTOMER_CHECKIN') {
     }
 
 ## Total number of records without filtering
-    $stmt = $conn->prepare("SELECT COUNT(*) AS allcount FROM v_event_checkin ");
+    $stmt = $conn->prepare("SELECT COUNT(*) AS allcount FROM evs_event_checkin ");
     $stmt->execute();
     $records = $stmt->fetch();
     $totalRecords = $records['allcount'];
 
 ## Total number of records with filtering
-    $stmt = $conn->prepare("SELECT COUNT(*) AS allcount FROM v_event_checkin WHERE 1 " . $searchQuery);
+    $stmt = $conn->prepare("SELECT COUNT(*) AS allcount FROM evs_event_checkin WHERE 1 " . $searchQuery);
     $stmt->execute($searchArray);
     $records = $stmt->fetch();
     $totalRecordwithFilter = $records['allcount'];
 
 ## Fetch records
-    $sql_getdata = "SELECT * FROM v_event_checkin WHERE 1 " . $searchQuery . " ORDER BY id  " . " LIMIT :limit,:offset";
+    $sql_getdata = "SELECT * FROM v_event_checkin WHERE 1=1 " . $searchQuery . " ORDER BY id  " . " LIMIT :limit,:offset";
 
-    /*
                     $txt = $sql_getdata ;
                     $my_file = fopen("cust_a.txt", "w") or die("Unable to open file!");
                     fwrite($my_file, $txt);
                     fclose($my_file);
-    */
+
 
     $stmt = $conn->prepare($sql_getdata);
 
@@ -173,8 +163,10 @@ if ($_POST["action"] === 'GET_CUSTOMER_CHECKIN') {
                 "cust_name_4" => $row['cust_name_4'],
                 "cust_name_5" => $row['cust_name_5'],
                 "cust_name_6" => $row['cust_name_6'],
+                "attendance_qty" => $row['attendance_qty'],
+                "room_reserve_qty" => $row['room_reserve_qty'],
                 "sale_contact_name" => $row['sale_contact_name'],
-                "update" => "<button type='button' name='update' id='" . $row['id'] . "' class='btn btn-info btn-xs update' data-toggle='tooltip' title='Update'>Update</button>",
+                "update" => "<button type='button' name='update' id='" . $row['id'] . "' class='btn btn-info btn-xs update' data-toggle='tooltip' title='Update'>Checkin</button>",
                 "check_in_status" => $row['check_in_status'] === 'Y' ? "<div class='text-success'>" . $row['check_in_status'] . "</div>" : "<div class='text-danger'> " . $row['check_in_status'] . "</div>",
             );
         } else {
@@ -200,4 +192,3 @@ if ($_POST["action"] === 'GET_CUSTOMER_CHECKIN') {
     echo json_encode($response);
 
 }
-
