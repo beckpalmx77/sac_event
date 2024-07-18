@@ -11,13 +11,12 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
 
     <style>
         .large-text {
-            font-size: 25px; /* ปรับขนาดตัวอักษรตามที่คุณต้องการ */
+            font-size: 30px; /* ปรับขนาดตัวอักษรตามที่คุณต้องการ */
         }
 
         .medium-text {
-            font-size: 15px; /* ปรับขนาดตัวอักษรตามที่คุณต้องการ */
+            font-size: 20px; /* ปรับขนาดตัวอักษรตามที่คุณต้องการ */
         }
-
     </style>
 
     <style>
