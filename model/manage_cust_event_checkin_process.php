@@ -6,6 +6,7 @@ include('../config/connect_db.php');
 include('../config/lang.php');
 include('../util/record_util.php');
 include('../util/reorder_record.php');
+include('../util/thai_date_util.php');
 
 if ($_POST["action"] === 'GET_DATA') {
 
@@ -13,9 +14,8 @@ if ($_POST["action"] === 'GET_DATA') {
 
     $return_arr = array();
 
-    $sql_get = "SELECT evs_event_checkin.*,evs_customer.* FROM evs_event_checkin 
-                LEFT JOIN evs_customer ON evs_customer.cust_id = evs_event_checkin.cust_id                     
-                WHERE evs_event_checkin.id = " . $id ;
+    $sql_get = "SELECT * FROM v_event_checkin         
+                WHERE v_event_checkin.id = " . $id ;
 
 /*
     $txt = $sql_get;
@@ -42,38 +42,39 @@ if ($_POST["action"] === 'GET_DATA') {
             "attendance_qty" => $result['attendance_qty'],
             "room_reserve_qty" => $result['room_reserve_qty'],
             "check_in_status" => $result['check_in_status'],
+            "table_number" => $result['table_number'],
             "sale_contact_name" => $result['sale_contact_name']);
     }
     echo json_encode($return_arr);
 }
 
-if ($_POST["action"] === 'UPDATE') {
+if ($_POST["action"] === 'CONFIRM') {
 
     if ($_POST["id"] != '') {
 
         $id = $_POST["id"];
-        $cust_id = $_POST["cust_id"];
-        $phone = $_POST["phone"];
-        $ar_name = $_POST["ar_name"];
-        $cust_name_1 = $_POST["cust_name_1"];
-        $province_name = $_POST["province_name"];
-        $sale_contact_name = $_POST["sale_contact_name"];
-
+        $check_in_status = "Y";
+        $timestamp = time();
+        $check_in_date = ($check_in_status === 'Y') ? thai_date($timestamp) : "-";
         $sql_find = "SELECT * FROM evs_event_checkin WHERE id = '" . $id . "'";
+
+/*
+        $txt = $sql_find . " | " . $check_in_status . " | " . $check_in_date;
+        $my_file = fopen("search_cond.txt", "w") or die("Unable to open file!");
+        fwrite($my_file, $txt);
+        fclose($my_file);
+*/
+
         $nRows = $conn->query($sql_find)->fetchColumn();
         if ($nRows > 0) {
-
-            $sql_update = "UPDATE evs_event_checkin SET ar_name=:ar_name,phone=:phone,province_name=:province_name,sale_contact_name=:sale_contact_name             
+            $sql_update = "UPDATE evs_event_checkin SET check_in_date=:check_in_date,check_in_status=:check_in_status             
             WHERE id = :id";
             $query = $conn->prepare($sql_update);
-            $query->bindParam(':ar_name', $ar_name, PDO::PARAM_STR);
-            $query->bindParam(':phone', $phone, PDO::PARAM_STR);
-            $query->bindParam(':province_name', $province_name, PDO::PARAM_STR);
-            $query->bindParam(':sale_contact_name', $sale_contact_name, PDO::PARAM_STR);
+            $query->bindParam(':check_in_date', $check_in_date, PDO::PARAM_STR);
+            $query->bindParam(':check_in_status', $check_in_status, PDO::PARAM_STR);
             $query->bindParam(':id', $id, PDO::PARAM_STR);
             $query->execute();
             echo $save_success;
-
         }
 
     }
@@ -161,6 +162,12 @@ if ($_POST["action"] === 'GET_CUSTOMER_CHECKIN') {
 
         if ($_POST['sub_action'] === "GET_MASTER") {
 
+            if ($row['check_in_status']==='Y') {
+                $update = "<button type='button' disabled name='update' id='" . $row['id'] . "' class='btn btn-info btn-xs update' data-toggle='tooltip' title='Update'>Check In</button>";
+            } else {
+                $update = "<button type='button' name='update' id='" . $row['id'] . "' class='btn btn-info btn-xs update' data-toggle='tooltip' title='Update'>Check In</button>";
+            }
+
             $data[] = array(
                 "id" => $row['id'],
                 "cust_id" => $row['cust_id'],
@@ -174,7 +181,9 @@ if ($_POST["action"] === 'GET_CUSTOMER_CHECKIN') {
                 "cust_name_5" => $row['cust_name_5'],
                 "cust_name_6" => $row['cust_name_6'],
                 "sale_contact_name" => $row['sale_contact_name'],
-                "update" => "<button type='button' name='update' id='" . $row['id'] . "' class='btn btn-info btn-xs update' data-toggle='tooltip' title='Update'>Update</button>",
+                "table_number" => $row['table_number'],
+                "detail" => "<button type='button' name='detail' id='" . $row['id'] . "' class='btn btn-secondary btn-xs detail' data-toggle='tooltip' title='Detail'>Detail</button>",
+                "update" => $update,
                 "check_in_status" => $row['check_in_status'] === 'Y' ? "<div class='text-success'>" . $row['check_in_status'] . "</div>" : "<div class='text-danger'> " . $row['check_in_status'] . "</div>",
             );
         } else {

@@ -157,7 +157,8 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                     <th>หมายเลขโทรศัพท์</th>
                                                     <th>จังหวัด</th>
                                                     <th>sale/ผู้ติดต่อ</th>
-                                                    <th>Check In</th>
+                                                    <th>Check In Status</th>
+                                                    <th>Action</th>
                                                     <th>Action</th>
                                                 </tr>
                                                 </thead>
@@ -169,7 +170,8 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                     <th>หมายเลขโทรศัพท์</th>
                                                     <th>จังหวัด</th>
                                                     <th>sale/ผู้ติดต่อ</th>
-                                                    <th>Check In</th>
+                                                    <th>Check In Status</th>
+                                                    <th>Action</th>
                                                     <th>Action</th>
                                                 </tr>
                                                 </tfoot>
@@ -192,16 +194,16 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                         <div class="modal-body">
                                                             <div class="modal-body">
 
-                                                                <div class="form-group">
-                                                                    <label for="text"
-                                                                           class="control-label">รหัสลูกค้า</label>
-                                                                    <input type="cust_id" class="form-control"
-                                                                           id="cust_id" name="cust_id"
-                                                                           readonly="true"
-                                                                           placeholder="รหัสลูกค้า">
-                                                                </div>
-
                                                                 <div class="form-group row">
+                                                                    <div class="col-sm-4">
+                                                                        <label for="cust_id"
+                                                                               class="control-label">รหัสบริษัท/ร้านค้า</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="cust_id"
+                                                                               name="cust_id"
+                                                                               readonly="true"
+                                                                               placeholder="">
+                                                                    </div>
                                                                     <div class="col-sm-4">
                                                                         <label for="ar_name"
                                                                                class="control-label">ชื่อบริษัท/ร้านค้า</label>
@@ -211,6 +213,19 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                                                required="required"
                                                                                placeholder="">
                                                                     </div>
+                                                                    <div class="col-sm-4">
+                                                                        <label for="table_number"
+                                                                               class="control-label">หมายเลขโต๊ะ</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="table_number"
+                                                                               name="table_number"
+                                                                               required="required"
+                                                                               readonly="true"
+                                                                               placeholder="หมายเลขโต๊ะ">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
 
                                                                     <div class="col-sm-4">
                                                                         <label for="phone"
@@ -337,6 +352,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                             <input type="submit" name="save" id="save"
                                                                    class="btn btn-primary" value="Confirm"/>
                                                             </span>
+
                                                             <button type="button" class="btn btn-danger"
                                                                     data-dismiss="modal">Close <i
                                                                         class="fa fa-window-close"></i>
@@ -489,6 +505,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                     {data: 'province_name'},
                     {data: 'sale_contact_name'},
                     {data: 'check_in_status'},
+                    {data: 'detail'},
                     {data: 'update'}
                 ]
             });
@@ -542,6 +559,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         let province_name = response[i].province_name;
                         let check_in_status = response[i].check_in_status;
                         let check_in_status_display = response[i].check_in_status==="Y" ? "Check In แล้ว" : "ยังไม่ได้ Check In";
+                        let table_number = response[i].table_number;
                         let attendance_qty = response[i].attendance_qty;
                         let sale_contact_name = response[i].sale_contact_name;
 
@@ -569,12 +587,88 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         };
 
                         $('#check_in_status_display').val(check_in_status_display);
-
+                        $('#table_number').css('color', 'blue');
+                        $("#table_number").css("fontSize", "30px");
+                        $('#table_number').val(table_number);
                         $('#attendance_qty').val(attendance_qty);
                         $('#sale_contact_name').val(sale_contact_name);
-                        $('.modal-title').html("<i class='fa fa-plus'></i> Edit Record");
-                        $('#action').val('UPDATE');
+                        $('.modal-title').html("<i class='fa fa-plus'></i> Check In Record");
+                        $('#action').val('CONFIRM');
                         $('#save').val('Confirm');
+                    }
+                },
+                error: function (response) {
+                    alertify.error("error : " + response);
+                }
+            });
+        });
+
+    </script>
+
+    <script>
+
+        $("#TableRecordList").on('click', '.detail', function () {
+            let id = $(this).attr("id");
+            //alert(id);
+            let formData = {action: "GET_DATA", id: id};
+            $.ajax({
+                type: "POST",
+                url: 'model/manage_cust_event_checkin_process.php',
+                dataType: "json",
+                data: formData,
+                success: function (response) {
+                    let len = response.length;
+                    for (let i = 0; i < len; i++) {
+                        let id = response[i].id;
+                        let cust_id = response[i].cust_id;
+                        let ar_name = response[i].ar_name;
+                        let cust_name_1 = response[i].cust_name_1;
+                        let cust_name_2 = response[i].cust_name_2;
+                        let cust_name_3 = response[i].cust_name_3;
+                        let cust_name_4 = response[i].cust_name_4;
+                        let cust_name_5 = response[i].cust_name_5;
+                        let cust_name_6 = response[i].cust_name_6;
+                        let phone = response[i].phone;
+                        let province_name = response[i].province_name;
+                        let check_in_status = response[i].check_in_status;
+                        let check_in_status_display = response[i].check_in_status==="Y" ? "Check In แล้ว" : "ยังไม่ได้ Check In";
+                        let table_number = response[i].table_number;
+                        let attendance_qty = response[i].attendance_qty;
+                        let sale_contact_name = response[i].sale_contact_name;
+
+                        $('#recordModal').modal('show');
+                        $('#id').val(id);
+                        $('#cust_id').val(cust_id);
+                        $('#ar_name').val(ar_name);
+                        $('#cust_name_1').val(cust_name_1);
+                        $('#cust_name_2').val(cust_name_2);
+                        $('#cust_name_3').val(cust_name_3);
+                        $('#cust_name_4').val(cust_name_4);
+                        $('#cust_name_5').val(cust_name_5);
+                        $('#cust_name_6').val(cust_name_6);
+                        $('#phone').val(phone);
+                        $('#province_name').val(province_name);
+                        $('#check_in_status').val(check_in_status);
+                        if (check_in_status==='Y')
+                        {
+                            //document.getElementById("check_in_status_display").style.color = 'green';
+                            $('#check_in_status_display').css('color', 'green');
+                        } else {
+                            //document.getElementById("check_in_status_display").style.color = 'red';
+                            $('#check_in_status_display').css('color', 'red');
+
+                        };
+
+                        $('#check_in_status_display').val(check_in_status_display);
+                        $('#table_number').css('color', 'blue');
+                        $("#table_number").css("fontSize", "30px");
+                        $('#table_number').val(table_number);
+                        $('#attendance_qty').val(attendance_qty);
+                        $('#sale_contact_name').val(sale_contact_name);
+                        $('.modal-title').html("<i class='fa fa-plus'></i> Check In Record");
+                        $('#action').val('CONFIRM');
+                        $('#save').val('Confirm');
+                        $('#save').attr('disabled', 'disabled');
                     }
                 },
                 error: function (response) {
