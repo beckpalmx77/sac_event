@@ -11,7 +11,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
 
     <style>
         .large-text {
-            font-size: 30px; /* ปรับขนาดตัวอักษรตามที่คุณต้องการ */
+            font-size: 50px; /* ปรับขนาดตัวอักษรตามที่คุณต้องการ */
         }
 
         .medium-text {
@@ -48,12 +48,6 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                 <?php
                 include('includes/Top-Bar.php');
                 ?>
-
-                <?php
-                include('clock_count.php');
-                ?>
-
-
                 <div class="container-fluid" id="container-wrapper">
                     <div class="row mb-3">
                         <div class="col-xl-3 col-md-6 mb-4">
@@ -124,7 +118,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><p
                                                         class="text-info large-text"
-                                                        id="Text4"></p></div>
+                                                        id="Text-Percent"></p></div>
                                             <div class="mt-2 mb-0 text-muted text-xs">
 
                                             </div>
@@ -149,7 +143,8 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                 </div>
                                 <div class="card-body">
                                     <section class="container-fluid">
-                                        <div class="medium-text font-weight-bold text-uppercase mb-1 " style="color: #8F35F6;">
+                                        <div class="medium-text font-weight-bold text-uppercase mb-1 "
+                                             style="color: #8F35F6;">
                                             ลงทะเบียนเข้างาน
                                         </div>
                                         <div class="col-md-12 col-md-offset-2">
@@ -202,6 +197,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                                            class="control-label">รหัสลูกค้า</label>
                                                                     <input type="cust_id" class="form-control"
                                                                            id="cust_id" name="cust_id"
+                                                                           readonly="true"
                                                                            placeholder="รหัสลูกค้า">
                                                                 </div>
 
@@ -225,67 +221,10 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                                                required="required"
                                                                                placeholder="">
                                                                     </div>
-                                                                </div>
-                                                                <div class="form-group row">
-                                                                    <div class="col-sm-4">
-                                                                        <label for="cust_name_1"
-                                                                               class="control-label">ชื่อผู้เข้าร่วมงาน 1</label>
-                                                                        <input type="text" class="form-control"
-                                                                               id="cust_name_1"
-                                                                               name="cust_name_1"
-                                                                               placeholder="">
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <label for="cust_name_2"
-                                                                               class="control-label">ชื่อผู้เข้าร่วมงาน 2</label>
-                                                                        <input type="text" class="form-control"
-                                                                               id="cust_name_2"
-                                                                               name="cust_name_2"
-                                                                               placeholder="">
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <label for="cust_name_3"
-                                                                               class="control-label">ชื่อผู้เข้าร่วมงาน 3</label>
-                                                                        <input type="text" class="form-control"
-                                                                               id="cust_name_3"
-                                                                               name="cust_name_3"
-                                                                               placeholder="">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group row">
-                                                                    <div class="col-sm-4">
-                                                                        <label for="cust_name_4"
-                                                                               class="control-label">ชื่อผู้เข้าร่วมงาน 4</label>
-                                                                        <input type="text" class="form-control"
-                                                                               id="cust_name_4"
-                                                                               name="cust_name_4"
-                                                                               placeholder="">
-                                                                    </div>
-
-                                                                    <div class="col-sm-4">
-                                                                        <label for="cust_name_5"
-                                                                               class="control-label">ชื่อผู้เข้าร่วมงาน 5</label>
-                                                                        <input type="text" class="form-control"
-                                                                               id="cust_name_5"
-                                                                               name="cust_name_5"
-                                                                               placeholder="">
-                                                                    </div>
-                                                                    <div class="col-sm-4">
-                                                                        <label for="cust_name_6"
-                                                                               class="control-label">ชื่อผู้เข้าร่วมงาน 6</label>
-                                                                        <input type="text" class="form-control"
-                                                                               id="cust_name_6"
-                                                                               name="cust_name_6"
-                                                                               placeholder="">
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group row">
                                                                     <input type="hidden" class="form-control"
                                                                            id="province_code"
                                                                            name="province_code">
-                                                                    <div class="col-sm-12">
+                                                                    <div class="col-sm-4">
                                                                         <label for="province_name"
                                                                                class="control-label">จังหวัด</label>
                                                                         <input type="text" class="form-control"
@@ -295,17 +234,85 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                                                readonly="true"
                                                                                placeholder="จังหวัด">
                                                                     </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-4">
+                                                                        <label for="cust_name_1"
+                                                                               class="control-label">ชื่อผู้เข้าร่วมงาน
+                                                                            1</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="cust_name_1"
+                                                                               name="cust_name_1"
+                                                                               placeholder="">
+                                                                    </div>
 
-                                                                    <!--div class="col-sm-2">
-                                                                        <label for="province_name"
-                                                                               class="control-label">เลือก</label>
-                                                                        <a data-toggle="modal"
-                                                                           href="#SearchProvinceModal"
-                                                                           class="btn btn-primary">
-                                                                            Click <i class="fa fa-search"
-                                                                                     aria-hidden="true"></i>
-                                                                        </a>
-                                                                    </div-->
+                                                                    <div class="col-sm-4">
+                                                                        <label for="cust_name_2"
+                                                                               class="control-label">ชื่อผู้เข้าร่วมงาน
+                                                                            2</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="cust_name_2"
+                                                                               name="cust_name_2"
+                                                                               placeholder="">
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <label for="cust_name_3"
+                                                                               class="control-label">ชื่อผู้เข้าร่วมงาน
+                                                                            3</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="cust_name_3"
+                                                                               name="cust_name_3"
+                                                                               placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-4">
+                                                                        <label for="cust_name_4"
+                                                                               class="control-label">ชื่อผู้เข้าร่วมงาน
+                                                                            4</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="cust_name_4"
+                                                                               name="cust_name_4"
+                                                                               placeholder="">
+                                                                    </div>
+
+                                                                    <div class="col-sm-4">
+                                                                        <label for="cust_name_5"
+                                                                               class="control-label">ชื่อผู้เข้าร่วมงาน
+                                                                            5</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="cust_name_5"
+                                                                               name="cust_name_5"
+                                                                               placeholder="">
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <label for="cust_name_6"
+                                                                               class="control-label">ชื่อผู้เข้าร่วมงาน
+                                                                            6</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="cust_name_6"
+                                                                               name="cust_name_6"
+                                                                               placeholder="">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <div class="col-sm-4">
+                                                                        <label for="attendance_qty"
+                                                                               class="control-label">จำนวนผู้เข้าร่วมงาน</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="attendance_qty"
+                                                                               name="attendance_qty"
+                                                                               placeholder="">
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <label for="attendance_qty"
+                                                                               class="control-label">จำนวนผู้เข้าร่วมงาน</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="attendance_qty"
+                                                                               name="attendance_qty"
+                                                                               placeholder="">
+                                                                    </div>
                                                                 </div>
 
 
@@ -318,7 +325,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                             <span class="icon-input-btn">
                                                                 <i class="fa fa-check"></i>
                                                             <input type="submit" name="save" id="save"
-                                                                   class="btn btn-primary" value="Save"/>
+                                                                   class="btn btn-primary" value="Confirm"/>
                                                             </span>
                                                             <button type="button" class="btn btn-danger"
                                                                     data-dismiss="modal">Close <i
@@ -384,17 +391,16 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
     <script>
 
         $(document).ready(function () {
-
-            GET_DATA("evs_customer", 1);
+            //GET_DATA("evs_customer", 1);
+            GET_DATA("evs_event_checkin", 1);
             GET_DATA("evs_event_checkin", 2);
             GET_DATA("evs_event_checkin", 3);
-            GET_DATA("evs_customer", 4);
 
             setInterval(function () {
-                GET_DATA("evs_customer", 1);
+                //GET_DATA("evs_customer", 1);
+                GET_DATA("evs_event_checkin", 1);
                 GET_DATA("evs_event_checkin", 2);
                 GET_DATA("evs_event_checkin", 3);
-                GET_DATA("evs_customer", 4);
             }, 3000);
 
         });
@@ -409,16 +415,13 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
             let cond = "";
             switch (idx) {
                 case 1:
-                    cond = " Where status = 'Y'";
+                    action = "GET_COUNT_RECORDS";
                     break;
                 case 2:
                     cond = " Where check_in_status = 'Y'";
                     break;
                 case 3:
                     cond = " Where check_in_status = 'N'";
-                    break;
-                case 4:
-                    cond = " Where status = 'Y'";
                     break;
             }
 
@@ -434,6 +437,14 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                     alertify.error("error : " + response);
                 }
             });
+
+            let value1 = document.getElementById("Text1").innerText;
+            let value2 = document.getElementById("Text2").innerText;
+            let number1 = parseFloat(value1);
+            let number2 = parseFloat(value2);
+            let result = (number2 * 100) / number1;
+            result = isNaN(result) ? 0 : result.toFixed(2);
+            document.getElementById("Text-Percent").innerText = result;
         }
 
     </script>
@@ -521,6 +532,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         let cust_name_6 = response[i].cust_name_6;
                         let phone = response[i].phone;
                         let province_name = response[i].province_name;
+                        let attendance_qty = response[i].attendance_qty;
                         let sale_contact_name = response[i].sale_contact_name;
 
                         $('#recordModal').modal('show');
@@ -535,10 +547,11 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         $('#cust_name_6').val(cust_name_6);
                         $('#phone').val(phone);
                         $('#province_name').val(province_name);
+                        $('#attendance_qty').val(attendance_qty);
                         $('#sale_contact_name').val(sale_contact_name);
                         $('.modal-title').html("<i class='fa fa-plus'></i> Edit Record");
                         $('#action').val('UPDATE');
-                        $('#save').val('Save');
+                        $('#save').val('Confirm');
                     }
                 },
                 error: function (response) {

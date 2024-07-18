@@ -39,6 +39,8 @@ if ($_POST["action"] === 'GET_DATA') {
             "cust_name_6" => $result['cust_name_6'],
             "phone" => $result['phone'],
             "province_name" => $result['province_name'],
+            "attendance_qty" => $result['attendance_qty'],
+            "room_reserve_qty" => $result['room_reserve_qty'],
             "sale_contact_name" => $result['sale_contact_name']);
     }
     echo json_encode($return_arr);
@@ -175,8 +177,10 @@ if ($_POST["action"] === 'GET_CUSTOMER_CHECKIN') {
                 "cust_name_4" => $row['cust_name_4'],
                 "cust_name_5" => $row['cust_name_5'],
                 "cust_name_6" => $row['cust_name_6'],
+                "attendance_qty" => $row['attendance_qty'],
+                "room_reserve_qty" => $row['room_reserve_qty'],
                 "sale_contact_name" => $row['sale_contact_name'],
-                "update" => "<button type='button' name='update' id='" . $row['id'] . "' class='btn btn-info btn-xs update' data-toggle='tooltip' title='Update'>Update</button>",
+                "update" => "<button type='button' name='update' id='" . $row['id'] . "' class='btn btn-info btn-xs update' data-toggle='tooltip' title='Update'>Checkin</button>",
                 "check_in_status" => $row['check_in_status'] === 'Y' ? "<div class='text-success'>" . $row['check_in_status'] . "</div>" : "<div class='text-danger'> " . $row['check_in_status'] . "</div>",
             );
         } else {
