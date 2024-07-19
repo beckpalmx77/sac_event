@@ -9,6 +9,7 @@ if (isset($_POST['query'])) {
 
     if (count($results) > 0) {
         foreach ($results as $row) {
+            echo '<div class="row">';
             echo '<div class="form-group">';
             echo '<label for="c-form-name">';
             echo '<span class="label-text">ข้อมูลที่ค้นพบ :</span>';
