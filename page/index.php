@@ -37,7 +37,7 @@
 <!-- Contact Form -->
 <div class="c-form-container section-container section-container-image-bg">
     <div class="container">
-        <div><img src="img/logo text-01.png" width="200" height="79"/></div>
+        <div><img src="img/logo text-01.png" width="250" height="129"/></div>
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
 
