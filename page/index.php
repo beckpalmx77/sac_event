@@ -62,6 +62,7 @@
                             <input type="text" id="searchText" name="searchText" placeholder="ชื่อ หรือ หมายเลขโทรศัพท์"
                                    class="c-form-name form-control">
                         </div>
+                        <button type="button" id="searchButton" class="btn">ค้นหา</button>
                     </form>
                     <div id="result" class="mt-3 row row-cols-1 row-cols-md-3 g-4"></div>
                 </div>
@@ -84,7 +85,7 @@
 <script src="assets/js/placeholder.js"></script>
 <![endif]-->
 
-<script>
+<!--script>
     $(document).ready(function () {
         $('#searchText').on('keyup', function () {
             let query = $(this).val();
@@ -94,6 +95,26 @@
                     method: 'POST',
                     data: {query: query},
                     success: function (data) {
+                        $('#result').html(data);
+                    }
+                });
+            } else {
+                $('#result').html(''); // ล้างผลลัพธ์เมื่อไม่มีคำค้นหา
+            }
+        });
+    });
+</script-->
+
+<script>
+    $(document).ready(function() {
+        $('#searchButton').on('click', function() {
+            let query = $('#searchText').val();
+            if (query.length >= 2) { // ค้นหาหลังจากพิมพ์เกิน 2 ตัวอักษร
+                $.ajax({
+                    url: 'search.php',
+                    method: 'POST',
+                    data: {query: query},
+                    success: function(data) {
                         $('#result').html(data);
                     }
                 });
