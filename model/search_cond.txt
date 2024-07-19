@@ -1,1 +1,0 @@
-SELECT * FROM evs_event_checkin WHERE id = '63' | N | -

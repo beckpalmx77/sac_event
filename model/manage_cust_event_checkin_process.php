@@ -15,14 +15,14 @@ if ($_POST["action"] === 'GET_DATA') {
     $return_arr = array();
 
     $sql_get = "SELECT * FROM v_event_checkin         
-                WHERE v_event_checkin.id = " . $id ;
+                WHERE v_event_checkin.id = " . $id;
 
-/*
-    $txt = $sql_get;
-    $my_file = fopen("search_cond.txt", "w") or die("Unable to open file!");
-    fwrite($my_file, $txt);
-    fclose($my_file);
-*/
+    /*
+        $txt = $sql_get;
+        $my_file = fopen("search_cond.txt", "w") or die("Unable to open file!");
+        fwrite($my_file, $txt);
+        fclose($my_file);
+    */
 
     $statement = $conn->query($sql_get);
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -39,6 +39,7 @@ if ($_POST["action"] === 'GET_DATA') {
             "cust_name_6" => $result['cust_name_6'],
             "phone" => $result['phone'],
             "province_name" => $result['province_name'],
+            "register_qty" => $result['register_qty'],
             "attendance_qty" => $result['attendance_qty'],
             "room_reserve_qty" => $result['room_reserve_qty'],
             "check_in_status" => $result['check_in_status'],
@@ -48,35 +49,77 @@ if ($_POST["action"] === 'GET_DATA') {
     echo json_encode($return_arr);
 }
 
+if ($_POST["action"] === 'UPDATE_DETAIL') {
+
+    if ($_POST["id"] != '') {
+
+        $id = $_POST["id"];
+        $cust_name_1 = $_POST["cust_name_1"];
+        $cust_name_2 = $_POST["cust_name_2"];
+        $cust_name_3 = $_POST["cust_name_3"];
+        $cust_name_4 = $_POST["cust_name_4"];
+        $cust_name_5 = $_POST["cust_name_5"];
+        $cust_name_6 = $_POST["cust_name_6"];
+        $phone = $_POST["phone"];
+        $register_qty = $_POST["register_qty"];
+        $attendance_qty = $_POST["attendance_qty"];
+        $table_number = $_POST["table_number"];
+
+        $sql_find = "SELECT * FROM evs_event_checkin WHERE id = '" . $id . "'";
+        $nRows = $conn->query($sql_find)->fetchColumn();
+        if ($nRows > 0) {
+            try {
+                $sql_update = "UPDATE evs_event_checkin SET cust_name_1=:cust_name_1,cust_name_2=:cust_name_2,cust_name_3=:cust_name_3
+            ,cust_name_4=:cust_name_4,cust_name_5=:cust_name_5,cust_name_6=:cust_name_6,phone_number=:phone
+            ,register_qty=:register_qty,attendance_qty=:attendance_qty,table_number=:table_number             
+            WHERE id = :id";
+                $query = $conn->prepare($sql_update);
+                $query->bindParam(':cust_name_1', $cust_name_1, PDO::PARAM_STR);
+                $query->bindParam(':cust_name_2', $cust_name_2, PDO::PARAM_STR);
+                $query->bindParam(':cust_name_3', $cust_name_3, PDO::PARAM_STR);
+                $query->bindParam(':cust_name_4', $cust_name_4, PDO::PARAM_STR);
+                $query->bindParam(':cust_name_5', $cust_name_5, PDO::PARAM_STR);
+                $query->bindParam(':cust_name_6', $cust_name_6, PDO::PARAM_STR);
+                $query->bindParam(':phone', $phone, PDO::PARAM_STR);
+                $query->bindParam(':register_qty', $register_qty, PDO::PARAM_STR);
+                $query->bindParam(':attendance_qty', $attendance_qty, PDO::PARAM_STR);
+                $query->bindParam(':table_number', $table_number, PDO::PARAM_STR);
+                $query->bindParam(':id', $id, PDO::PARAM_STR);
+                $query->execute();
+                echo $save_success;
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        }
+
+    }
+}
+
 if ($_POST["action"] === 'CONFIRM') {
 
     if ($_POST["id"] != '') {
 
         $id = $_POST["id"];
         $check_in_status = "Y";
+        $attendance_qty = $_POST["attendance_qty"];
         $timestamp = time();
         $check_in_date = ($check_in_status === 'Y') ? thai_date($timestamp) : "-";
         $sql_find = "SELECT * FROM evs_event_checkin WHERE id = '" . $id . "'";
-
-/*
-        $txt = $sql_find . " | " . $check_in_status . " | " . $check_in_date;
-        $my_file = fopen("search_cond.txt", "w") or die("Unable to open file!");
-        fwrite($my_file, $txt);
-        fclose($my_file);
-*/
-
         $nRows = $conn->query($sql_find)->fetchColumn();
         if ($nRows > 0) {
-            $sql_update = "UPDATE evs_event_checkin SET check_in_date=:check_in_date,check_in_status=:check_in_status             
-            WHERE id = :id";
-            $query = $conn->prepare($sql_update);
-            $query->bindParam(':check_in_date', $check_in_date, PDO::PARAM_STR);
-            $query->bindParam(':check_in_status', $check_in_status, PDO::PARAM_STR);
-            $query->bindParam(':id', $id, PDO::PARAM_STR);
-            $query->execute();
-            echo $save_success;
+            try {
+                $sql_update = "UPDATE evs_event_checkin SET check_in_date=:check_in_date, check_in_status=:check_in_status, attendance_qty=:attendance_qty WHERE id = :id";
+                $query = $conn->prepare($sql_update);
+                $query->bindParam(':check_in_date', $check_in_date, PDO::PARAM_STR);
+                $query->bindParam(':check_in_status', $check_in_status, PDO::PARAM_STR);
+                $query->bindParam(':attendance_qty', $attendance_qty, PDO::PARAM_STR);
+                $query->bindParam(':id', $id, PDO::PARAM_STR);
+                $query->execute();
+                echo $save_success;
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
         }
-
     }
 }
 
@@ -162,7 +205,7 @@ if ($_POST["action"] === 'GET_CUSTOMER_CHECKIN') {
 
         if ($_POST['sub_action'] === "GET_MASTER") {
 
-            if ($row['check_in_status']==='Y') {
+            if ($row['check_in_status'] === 'Y') {
                 $update = "<button type='button' disabled name='update' id='" . $row['id'] . "' class='btn btn-info btn-xs update' data-toggle='tooltip' title='Update'>Check In</button>";
             } else {
                 $update = "<button type='button' name='update' id='" . $row['id'] . "' class='btn btn-info btn-xs update' data-toggle='tooltip' title='Update'>Check In</button>";

@@ -195,7 +195,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                             <div class="modal-body">
 
                                                                 <div class="form-group row">
-                                                                    <div class="col-sm-4">
+                                                                    <div class="col-sm-3">
                                                                         <label for="cust_id"
                                                                                class="control-label">รหัสบริษัท/ร้านค้า</label>
                                                                         <input type="text" class="form-control"
@@ -204,13 +204,13 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                                                readonly="true"
                                                                                placeholder="">
                                                                     </div>
-                                                                    <div class="col-sm-4">
+                                                                    <div class="col-sm-5">
                                                                         <label for="ar_name"
                                                                                class="control-label">ชื่อบริษัท/ร้านค้า</label>
                                                                         <input type="text" class="form-control"
                                                                                id="ar_name"
                                                                                name="ar_name"
-                                                                               required="required"
+                                                                               readonly="true"
                                                                                placeholder="">
                                                                     </div>
                                                                     <div class="col-sm-4">
@@ -219,8 +219,6 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                                         <input type="text" class="form-control"
                                                                                id="table_number"
                                                                                name="table_number"
-                                                                               required="required"
-                                                                               readonly="true"
                                                                                placeholder="หมายเลขโต๊ะ">
                                                                     </div>
                                                                 </div>
@@ -248,6 +246,16 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                                                required="required"
                                                                                readonly="true"
                                                                                placeholder="จังหวัด">
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <label for="sale_contact_name"
+                                                                               class="control-label">ชื่อเซลล์</label>
+                                                                        <input type="text" class="form-control"
+                                                                               id="sale_contact_name"
+                                                                               name="sale_contact_name"
+                                                                               required="required"
+                                                                               readonly="true"
+                                                                               placeholder="ื่อเซลล์">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
@@ -313,11 +321,11 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
 
                                                                 <div class="form-group row">
                                                                     <div class="col-sm-4">
-                                                                        <label for="attendance_qty"
-                                                                               class="control-label">จำนวนผู้เข้าร่วมงาน</label>
+                                                                        <label for="register_qty"
+                                                                               class="control-label">จำนวนลงทะเบียนร่วมงาน</label>
                                                                         <input type="text" class="form-control"
-                                                                               id="attendance_qty"
-                                                                               name="attendance_qty"
+                                                                               id="register_qty"
+                                                                               name="register_qty"
                                                                                placeholder="">
                                                                     </div>
                                                                     <div class="col-sm-4">
@@ -329,9 +337,11 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                                                placeholder="">
                                                                     </div>
                                                                     <div class="col-sm-4">
-                                                                        <input type="hidden" id="check_in_status" name="check_in_status">
+                                                                        <input type="hidden" id="check_in_status"
+                                                                               name="check_in_status">
                                                                         <label for="check_in_status_display"
-                                                                               class="control-label">สถานะการ Check In</label>
+                                                                               class="control-label">สถานะการ Check
+                                                                            In</label>
                                                                         <input type="text" class="form-control"
                                                                                id="check_in_status_display"
                                                                                name="check_in_status_display"
@@ -347,6 +357,9 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                         <div class="modal-footer">
                                                             <input type="hidden" name="id" id="id"/>
                                                             <input type="hidden" name="action" id="action" value=""/>
+                                                            <button type="button" id="DeatilButton" name="DeatilButton" class="btn btn-success">Update <i
+                                                                        class="fa fa-check"></i>
+                                                            </button>
                                                             <span class="icon-input-btn">
                                                                 <i class="fa fa-check"></i>
                                                             <input type="submit" name="save" id="save"
@@ -512,21 +525,25 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
 
             <!-- *** FOR SUBMIT FORM *** -->
             $("#recordModal").on('submit', '#recordForm', function (event) {
-                event.preventDefault();
-                $('#save').attr('disabled', 'disabled');
-                let formData = $(this).serialize();
-                $.ajax({
-                    url: 'model/manage_cust_event_checkin_process.php',
-                    method: "POST",
-                    data: formData,
-                    success: function (data) {
-                        alertify.success(data);
-                        $('#recordForm')[0].reset();
-                        $('#recordModal').modal('hide');
-                        $('#save').attr('disabled', false);
-                        dataRecords.ajax.reload();
-                    }
-                })
+                if ($('#check_in_status').val() === 'N') {
+                    event.preventDefault();
+                    $('#save').attr('disabled', 'disabled');
+                    let formData = $(this).serialize();
+                    $.ajax({
+                        url: 'model/manage_cust_event_checkin_process.php',
+                        method: "POST",
+                        data: formData,
+                        success: function (data) {
+                            alertify.success(data);
+                            $('#recordForm')[0].reset();
+                            $('#recordModal').modal('hide');
+                            $('#save').attr('disabled', false);
+                            dataRecords.ajax.reload();
+                        }
+                    })
+                } else {
+                    alert("ยืนยันรายการนี้ไปเรียบร้อยแล้ว");
+                }
             });
             <!-- *** FOR SUBMIT FORM *** -->
         });
@@ -558,7 +575,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         let phone = response[i].phone;
                         let province_name = response[i].province_name;
                         let check_in_status = response[i].check_in_status;
-                        let check_in_status_display = response[i].check_in_status==="Y" ? "Check In แล้ว" : "ยังไม่ได้ Check In";
+                        let check_in_status_display = response[i].check_in_status === "Y" ? "Check In แล้ว" : "ยังไม่ได้ Check In";
                         let table_number = response[i].table_number;
                         let attendance_qty = response[i].attendance_qty;
                         let sale_contact_name = response[i].sale_contact_name;
@@ -576,15 +593,15 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         $('#phone').val(phone);
                         $('#province_name').val(province_name);
                         $('#check_in_status').val(check_in_status);
-                        if (check_in_status==='Y')
-                        {
+                        if (check_in_status === 'Y') {
                             //document.getElementById("check_in_status_display").style.color = 'green';
                             $('#check_in_status_display').css('color', 'green');
                         } else {
                             //document.getElementById("check_in_status_display").style.color = 'red';
                             $('#check_in_status_display').css('color', 'red');
 
-                        };
+                        }
+                        ;
 
                         $('#check_in_status_display').val(check_in_status_display);
                         $('#table_number').css('color', 'blue');
@@ -631,9 +648,10 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         let phone = response[i].phone;
                         let province_name = response[i].province_name;
                         let check_in_status = response[i].check_in_status;
-                        let check_in_status_display = response[i].check_in_status==="Y" ? "Check In แล้ว" : "ยังไม่ได้ Check In";
+                        let check_in_status_display = response[i].check_in_status === "Y" ? "Check In แล้ว" : "ยังไม่ได้ Check In";
                         let table_number = response[i].table_number;
                         let attendance_qty = response[i].attendance_qty;
+                        let register_qty = response[i].register_qty;
                         let sale_contact_name = response[i].sale_contact_name;
 
                         $('#recordModal').modal('show');
@@ -649,26 +667,26 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         $('#phone').val(phone);
                         $('#province_name').val(province_name);
                         $('#check_in_status').val(check_in_status);
-                        if (check_in_status==='Y')
-                        {
+                        if (check_in_status === 'Y') {
                             //document.getElementById("check_in_status_display").style.color = 'green';
                             $('#check_in_status_display').css('color', 'green');
                         } else {
                             //document.getElementById("check_in_status_display").style.color = 'red';
                             $('#check_in_status_display').css('color', 'red');
 
-                        };
+                        }
+                        ;
 
                         $('#check_in_status_display').val(check_in_status_display);
                         $('#table_number').css('color', 'blue');
                         $("#table_number").css("fontSize", "30px");
                         $('#table_number').val(table_number);
                         $('#attendance_qty').val(attendance_qty);
+                        $('#register_qty').val(register_qty);
                         $('#sale_contact_name').val(sale_contact_name);
                         $('.modal-title').html("<i class='fa fa-plus'></i> Check In Record");
-                        $('#action').val('CONFIRM');
+                        $('#action').val('UPDATE_DETAIL');
                         $('#save').val('Confirm');
-                        $('#save').attr('disabled', 'disabled');
                     }
                 },
                 error: function (response) {
@@ -679,6 +697,27 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
 
     </script>
 
+    <script>
+        $("#recordModal").on('click', '#DeatilButton', function (event) {
+            event.preventDefault();
+            $('#save').attr('disabled', 'disabled');
+            let formData = $('#recordForm').serialize();
+            //alert(formData);
+            $.ajax({
+                url: 'model/manage_cust_event_checkin_process.php',
+                method: "POST",
+                data: formData,
+                success: function (data) {
+                    alertify.success(data);
+                    $('#recordForm')[0].reset();
+                    $('#recordModal').modal('hide');
+                    $('#save').attr('disabled', false);
+                    dataRecords.ajax.reload();
+                }
+            })
+
+        });
+    </script>
 
     </body>
 
