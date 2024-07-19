@@ -42,6 +42,12 @@
         justify-content: space-between;
         align-items: center;
     }
+    .image-container img {
+        display: block;
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
 
 </style>
 
