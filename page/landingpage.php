@@ -67,14 +67,14 @@
 <img src="img/sac10year_2_1.png" alt="Nature" class="responsive">
 
 <div class="image-container">
-    <img src="img/sac10year_3_1.png" alt="">
-    <img src="img/sac10year_3_2.png" alt="">
-    <img src="img/sac10year_3_3.png" alt="">
-    <img src="img/sac10year_3_4.png" alt="">
-    <img src="img/sac10year_3_5.png" alt="">
+    <img src="img/sac10year_3_1.png" alt="" class="responsive">
+    <img src="img/sac10year_3_2.png" alt="" class="responsive">
+    <img src="img/sac10year_3_3.png" alt="" class="responsive">
+    <img src="img/sac10year_3_4.png" alt="" class="responsive">
+    <img src="img/sac10year_3_5.png" alt="" class="responsive">
 </div>
 
-<a href="http://171.100.56.194:8999/sac_event/page/" target="_blank"><img src="img/sac10year_456.png" alt="Nature"></a>
+<a href="http://171.100.56.194:8999/sac_event/page/" target="_blank"><img src="img/sac10year_456.png" alt="Nature" class="responsive"></a>
 
 
 <script>
