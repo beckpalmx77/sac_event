@@ -52,6 +52,7 @@
                     data-transform="pad(00) -> split -> delay">
                 <span data-view="flip"></span>
             </div>
+
             <span data-key="label" data-view="text" class="tick-label"></span>
         </div>
     </div>
@@ -67,8 +68,9 @@
     <img src="img/sac10year_3_5.png" alt="">
 </div>
 
-<img src="img/sac10year_456.png" alt="Nature">
-
+<img src="img/sac10year_4.png" alt="Nature" class="responsive">
+<img src="img/sac10year_5.png" alt="Nature" class="responsive">
+<img src="img/sac10year_6.png" alt="Nature" class="responsive">
 
 <script>
     function handleTickInit(tick) {
