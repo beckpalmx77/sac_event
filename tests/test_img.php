@@ -23,5 +23,20 @@
     <area target="_blank" alt="6" title="6" href="6" coords="1893,6312,33,5703" shape="rect">
 </map>
 
+<div class="tick"
+     data-did-init="handleTickInit">
+    <div data-repeat="true"
+         data-layout="horizontal center fit"
+         data-transform="preset(d, h, m, s) -> delay">
+        <div class="tick-group">
+            <div data-key="value"
+                 data-repeat="true"
+                 data-transform="pad(00) -> split -> delay">
+                <span data-view="flip"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

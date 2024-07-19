@@ -13,7 +13,7 @@
 <body>
 
 
-<style>
+<!--style>
     .container { margin: 150px auto; max-width: 960px; }
     .tick {
         font-size:1rem;
@@ -29,9 +29,10 @@
         margin:0 .25em;
         text-align:center;
     }
-</style>
+</style-->
 
 <div class="container">
+    <img src="img/sac_event_img_1.png" alt="Nature" class="responsive" usemap="#image-map">
     <div class="tick"
          data-did-init="handleTickInit">
         <div data-repeat="true"
