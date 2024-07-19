@@ -11,6 +11,13 @@
 <!-- START OF FLIP EXAMPLE PRESET -->
 
 <style>
+    .responsive {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+<style>
     .tick {
         padding-bottom: 1em;
         font-size: 1rem;
