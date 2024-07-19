@@ -16,7 +16,7 @@
 
 <map name="image-map">
     <map name="image-map">
-        <area target="_blank" alt="1" title="1" href="1" coords="1629,2729,323,2356" shape="rect">
+        <area target="_blank" alt="1" title="1" href="http://171.100.56.194:8999/sac_event/" coords="1629,2729,323,2356" shape="rect">
     </map>
 </map>
 
