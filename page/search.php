@@ -24,6 +24,6 @@ if (isset($_POST['query'])) {
             echo '</div>';
         }
     } else {
-        echo '<div class="alert alert-warning">No results found</div>';
+            echo '<div class="alert alert-warning">ไม่พบข้อมูลตามที่ค้นหา</div>';
     }
 }
