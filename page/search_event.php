@@ -110,7 +110,7 @@
     $(document).ready(function() {
         $('#searchButton').on('click', function() {
             let query = $('#searchText').val();
-            if (query.length >= 2) { // ค้นหาหลังจากพิมพ์เกิน 2 ตัวอักษร
+            if (query.length >= 1) { // ค้นหาหลังจากพิมพ์เกิน 2 ตัวอักษร
                 $.ajax({
                     url: 'search.php',
                     method: 'POST',
