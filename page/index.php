@@ -52,6 +52,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="c-form-bottom">
                     <form id="searchForm">
                         <div class="form-group">
@@ -64,7 +65,7 @@
                         </div>
                         <button type="button" id="searchButton" class="btn">ค้นหา</button>
                     </form>
-                    <div id="result" class="mt-3 row row-cols-1 row-cols-md-3 g-4"></div>
+                    <div id="result"></div>
                 </div>
 
             </div>

@@ -9,14 +9,17 @@ if (isset($_POST['query'])) {
 
     if (count($results) > 0) {
         foreach ($results as $row) {
-            echo '<div class="row">';
+            echo '<br>';
+            echo '<div class="c-form-top">';
+            echo '<div class="c-form-top-left">';
             echo '<div class="form-group">';
             echo '<label for="c-form-name">';
             echo '<span class="label-text">ข้อมูลที่ค้นพบ :</span>';
             echo '</label>';
-            echo '<h1 class="card-title">' . "ชื่อผู้เข้าร่วมงาน : " . htmlspecialchars($row['ar_name']) . '</h1>';
-            echo '<h1 class="card-title">' . "หมายเลขโทรศัพท์ : " . htmlspecialchars($row['phone']) . '</h1>';
-            echo '<h1 class="card-title">' . "หมายเลขโต๊ะ : " . htmlspecialchars($row['table_number']) . '</h1>';
+            echo '<h3 class="card-title">' . htmlspecialchars($row['ar_name']) . '</h3>';
+            echo '<h3 class="card-title">' . htmlspecialchars($row['phone']) . '</h3>';
+            echo '<h3 class="card-title">' . "หมายเลขโต๊ะ : " . htmlspecialchars($row['table_number']) . '</h3>';
+            echo '</div>';
             echo '</div>';
             echo '</div>';
         }
