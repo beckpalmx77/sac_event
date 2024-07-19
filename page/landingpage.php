@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Flip Example Preset</title>
-
+    <title>บริษัท สงวนออโต้คาร์ จำกัด</title>
+    <link rel="shortcut icon" href="img/logo.png">
     <link rel="stylesheet" href="flip/flip.min.css" />
 </head>
 <body>
@@ -67,7 +67,7 @@
     <img src="img/sac10year_3_5.png" alt="">
 </div>
 
-<img src="img/sac10year_456.png" alt="Nature">
+<a href="http://171.100.56.194:8999/sac_event/page/" target="_blank"><img src="img/sac10year_456.png" alt="Nature"></a>
 
 
 <script>
