@@ -738,7 +738,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         $('#attendance_qty').val(attendance_qty);
                         $('#register_qty').val(register_qty);
                         $('#sale_contact_name').val(sale_contact_name);
-                        $('.modal-title').html("<i class='fa fa-plus'></i> Check In Record");
+                        $('.modal-title').html("<i class='fa fa-plus'></i> Detail ");
                         $('#action').val('UPDATE_DETAIL');
                         $('#save').val('Confirm');
                     }
