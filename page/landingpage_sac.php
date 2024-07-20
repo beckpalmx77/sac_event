@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Flip Example Preset</title>
+    <title>บริษัท สงวนออโต้คาร์ จำกัด</title>
+    <link rel="shortcut icon" href="img/logo.png">
 
-    <link rel="stylesheet" href="flip/flip.min.css" />
 </head>
 <body>
 <!-- START OF FLIP EXAMPLE PRESET -->
+
+<style>
+    .responsive {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
 
 <style>
     .tick {
@@ -35,6 +42,12 @@
         justify-content: space-between;
         align-items: center;
     }
+    .image-container img {
+        display: block;
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
 
 </style>
 
@@ -60,59 +73,33 @@
 <img src="img/sac10year_2_1.png" alt="Nature" class="responsive">
 
 <div class="image-container">
-    <img src="img/sac10year_3_1.png" alt="">
-    <img src="img/sac10year_3_2.png" alt="">
-    <img src="img/sac10year_3_3.png" alt="">
-    <img src="img/sac10year_3_4.png" alt="">
-    <img src="img/sac10year_3_5.png" alt="">
+    <img src="img/sac10year_3_1.png" alt="" class="responsive">
+    <img src="img/sac10year_3_2.png" alt="" class="responsive">
+    <img src="img/sac10year_3_3.png" alt="" class="responsive">
+    <img src="img/sac10year_3_4.png" alt="" class="responsive">
+    <img src="img/sac10year_3_5.png" alt="" class="responsive">
 </div>
 
-<div class="image-container">
-    <img src="img/sac10year_4_1.png" alt="">
-    <img src="img/sac10year_4_2.png" alt="">
-    <img src="img/sac10year_4_3.png" alt="">
-</div>
+<a href="http://171.100.56.194:8999/sac_event/page/" target="_blank"><img src="img/sac10year_456.png" alt="Nature" class="responsive"></a>
 
-
-<script>
-    function handleTickInit(tick) {
-        // Uncomment to set labels to different language ( in this case Dutch )
-        /*
-let locale = {
-    YEAR_PLURAL: 'Jaren',
-    YEAR_SINGULAR: 'Jaar',
-    MONTH_PLURAL: 'Maanden',
-    MONTH_SINGULAR: 'Maand',
-    WEEK_PLURAL: 'Weken',
-    WEEK_SINGULAR: 'Week',
-    DAY_PLURAL: 'Dagen',
-    DAY_SINGULAR: 'Dag',
-    HOUR_PLURAL: 'Uren',
-    HOUR_SINGULAR: 'Uur',
-    MINUTE_PLURAL: 'Minuten',
-    MINUTE_SINGULAR: 'Minuut',
-    SECOND_PLURAL: 'Seconden',
-    SECOND_SINGULAR: 'Seconde',
-    MILLISECOND_PLURAL: 'Milliseconden',
-    MILLISECOND_SINGULAR: 'Milliseconde'
-};
-
-for (let key in locale) {
-    if (!locale.hasOwnProperty(key)) { continue; }
-    tick.setConstant(key, locale[key]);
-}
-*/
-
-        let nextYear = new Date().getFullYear() + 1;
-
-        Tick.count.down('2024-09-21').onupdate = function (value) {
-            tick.value = value;
+<div class="clock-builder-output"></div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="clock_assets/flipclock.js"></script>
+<link type="text/css" rel="stylesheet" href="clock_assets/flipclock.css" />
+<style text="text/css">body .flip-clock-wrapper ul li a div div.inn, body .flip-clock-small-wrapper ul li a div div.inn { color: #CCCCCC; background-color: #333333; } body .flip-clock-dot, body .flip-clock-small-wrapper .flip-clock-dot { background: #323434; } body .flip-clock-wrapper .flip-clock-meridium a, body .flip-clock-small-wrapper .flip-clock-meridium a { color: #323434; }</style>
+<script type="text/javascript">
+    $(function(){
+        FlipClock.Lang.Custom = { days:'Days', hours:'Hours', minutes:'Minutes', seconds:'Seconds' };
+        let opts = {
+            clockFace: 'DailyCounter',
+            countdown: true,
+            language: 'Custom'
         };
-    }
+        let countdown = 1721471100 - ((new Date().getTime())/1000); // from: 07/20/2024 05:25 pm +0700
+        countdown = Math.max(1, countdown);
+        $('.clock-builder-output').FlipClock(countdown, opts);
+    });
 </script>
 
-<!-- END OF FLIP EXAMPLE PRESET -->
-
-<script src="flip/flip.min.js"></script>
 </body>
 </html>
