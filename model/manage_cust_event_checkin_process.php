@@ -100,19 +100,42 @@ if ($_POST["action"] === 'CONFIRM') {
     if ($_POST["id"] != '') {
 
         $id = $_POST["id"];
-        $check_in_status = "Y";
+        $cust_name_1 = $_POST["cust_name_1"];
+        $cust_name_2 = $_POST["cust_name_2"];
+        $cust_name_3 = $_POST["cust_name_3"];
+        $cust_name_4 = $_POST["cust_name_4"];
+        $cust_name_5 = $_POST["cust_name_5"];
+        $cust_name_6 = $_POST["cust_name_6"];
+        $phone = $_POST["phone"];
+        $register_qty = $_POST["register_qty"];
         $attendance_qty = $_POST["attendance_qty"];
+        $table_number = $_POST["table_number"];
+        $check_in_status = "Y";
         $timestamp = time();
         $check_in_date = ($check_in_status === 'Y') ? thai_date($timestamp) : "-";
         $sql_find = "SELECT * FROM evs_event_checkin WHERE id = '" . $id . "'";
         $nRows = $conn->query($sql_find)->fetchColumn();
+
         if ($nRows > 0) {
             try {
-                $sql_update = "UPDATE evs_event_checkin SET check_in_date=:check_in_date, check_in_status=:check_in_status, attendance_qty=:attendance_qty WHERE id = :id";
+                $sql_update = "UPDATE evs_event_checkin SET cust_name_1=:cust_name_1,cust_name_2=:cust_name_2,cust_name_3=:cust_name_3
+                ,cust_name_4=:cust_name_4,cust_name_5=:cust_name_5,cust_name_6=:cust_name_6,phone_number=:phone
+                ,register_qty=:register_qty,attendance_qty=:attendance_qty,table_number=:table_number      
+                ,check_in_date=:check_in_date, check_in_status=:check_in_status        
+                WHERE id = :id";
                 $query = $conn->prepare($sql_update);
+                $query->bindParam(':cust_name_1', $cust_name_1, PDO::PARAM_STR);
+                $query->bindParam(':cust_name_2', $cust_name_2, PDO::PARAM_STR);
+                $query->bindParam(':cust_name_3', $cust_name_3, PDO::PARAM_STR);
+                $query->bindParam(':cust_name_4', $cust_name_4, PDO::PARAM_STR);
+                $query->bindParam(':cust_name_5', $cust_name_5, PDO::PARAM_STR);
+                $query->bindParam(':cust_name_6', $cust_name_6, PDO::PARAM_STR);
+                $query->bindParam(':phone', $phone, PDO::PARAM_STR);
+                $query->bindParam(':register_qty', $register_qty, PDO::PARAM_STR);
+                $query->bindParam(':attendance_qty', $attendance_qty, PDO::PARAM_STR);
+                $query->bindParam(':table_number', $table_number, PDO::PARAM_STR);
                 $query->bindParam(':check_in_date', $check_in_date, PDO::PARAM_STR);
                 $query->bindParam(':check_in_status', $check_in_status, PDO::PARAM_STR);
-                $query->bindParam(':attendance_qty', $attendance_qty, PDO::PARAM_STR);
                 $query->bindParam(':id', $id, PDO::PARAM_STR);
                 $query->execute();
                 echo $save_success;
@@ -150,9 +173,6 @@ if ($_POST["action"] === 'GET_CUSTOMER_CHECKIN') {
 
 ## Search
     $searchQuery = " ";
-    //if ($_POST["page_manage"]!=="ADMIN") {
-    //$searchQuery = " AND cust_id = '" . $_SESSION['cust_id'] . "'";
-    //}
 
     if ($searchValue != '') {
         $searchQuery = " AND (ar_name LIKE :ar_name or cust_name_1 LIKE :cust_name_1 or

@@ -44,7 +44,7 @@
     <style>
         p {
             text-align: center;
-            font-size: 60px;
+            font-size: 40px;
             margin-top: 0px;
         }
     </style>
@@ -120,8 +120,8 @@
         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Output the result in an element with id="demo"
-        document.getElementById("CountDown").innerHTML = days + " Days " + hours + " Hours "
-            + minutes + " Minutes " + seconds + " Seconds ";
+        document.getElementById("CountDown").innerHTML = days + " Days \n\r" + hours + " Hours \n\r"
+            + minutes + " Minutes \n\r" + seconds + " Seconds ";
 
         // If the count down is over, write some text
         if (distance < 0) {
