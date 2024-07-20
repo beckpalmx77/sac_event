@@ -31,8 +31,8 @@
 
     <style>
         .clock {
-            margin: 0.375em auto;
-            width: 400px;
+            margin: 0.275em auto;
+            width: 320px;
         }
         .message {
             text-align: center;
