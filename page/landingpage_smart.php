@@ -1,29 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>บริษัท สงวนออโต้คาร์ จำกัด</title>
     <link rel="shortcut icon" href="img/logo.png">
-    <link rel="stylesheet" href="flip/flip.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css">
     <style>
         .responsive {
             max-width: 100%;
             height: auto;
-        }
-        .tick {
-            padding-bottom: 1em;
-            font-size: 1rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans,
-            Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-        }
-        .tick-label {
-            font-size: 0.375em;
-            text-align: center;
-        }
-        .tick-group {
-            margin: 0 0.25em;
-            text-align: center;
         }
         .image-container {
             display: flex;
@@ -31,24 +19,29 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .image-container img {
             display: block;
             margin: 0;
             padding: 0;
             border: none;
         }
-        @media (max-width: 600px) {
-            .tick {
-                font-size: 0.75rem;
-            }
-            .tick-label {
-                font-size: 0.3em;
-            }
-            .image-container img {
-                width: 100%;
-            }
+
+    </style>
+
+    <style>
+        .clock {
+            margin: 2em auto;
+            width: 800px;
+        }
+        .message {
+            text-align: center;
+            font-size: 2em;
+            margin-top: 20px;
         }
     </style>
+
+
 </head>
 <body>
 <!-- START OF FLIP EXAMPLE PRESET -->
@@ -56,16 +49,8 @@
 <img src="img/sac10year_1_1.png" alt="Nature" class="responsive">
 <img src="img/sac10year_1_2.png" alt="Nature" class="responsive">
 
-<div class="tick" data-did-init="handleTickInit">
-    <div data-repeat="true" data-layout="horizontal center fit" data-transform="preset(d, h, m, s) -> delay">
-        <div class="tick-group">
-            <div data-key="value" data-repeat="true" data-transform="pad(00) -> split -> delay">
-                <span data-view="flip"></span>
-            </div>
-            <span data-key="label" data-view="text" class="tick-label"></span>
-        </div>
-    </div>
-</div>
+<div class="clock" id="countdown"></div>
+<p id="message" class="message"></p>
 
 <img src="img/sac10year_2_1.png" alt="Nature" class="responsive">
 
@@ -81,25 +66,31 @@
     <img src="img/sac10year_456.png" alt="Nature" class="responsive">
 </a>
 
-<script>
-    function handleTickInit(tick) {
-        let nextYear = new Date().getFullYear() + 1;
-        Tick.count.down('2024-09-21').onupdate = function (value) {
-            tick.value = value;
-        };
-    }
-</script>
 
-<!-- END OF FLIP EXAMPLE PRESET -->
-
-<script src="flip/flip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
 <script>
-    $(document).ready(function(e) {
-        $('img[usemap]').rwdImageMaps();
+    $(document).ready(function() {
+        // Set the date we're counting down to
+        let countDownDate = new Date("Sep 21, 2024 17:00:00").getTime();
+
+        // Calculate the time remaining in seconds
+        let now = new Date().getTime();
+        let distance = countDownDate - now;
+        let secondsRemaining = Math.floor(distance / 1000);
+
+        // Initialize the flip clock
+        let clock = $('#countdown').FlipClock(secondsRemaining, {
+            clockFace: 'DailyCounter',
+            countdown: true,
+            callbacks: {
+                stop: function() {
+                    $('#message').html('EXPIRED');
+                }
+            }
+        });
     });
 </script>
+
+
 </body>
 </html>
 
