@@ -30,3 +30,18 @@ if ($_POST["action"] === 'GET_COUNT_RECORDS_COND') {
     }
     echo $record;
 }
+
+if ($_POST["action"] === 'GET_SUM') {
+    $table_name = $_POST["table_name"];
+    $cond = $_POST["cond"];
+    $field = $_POST["field"];
+    $return_arr = array();
+    $sql_get = "SELECT sum(" . $field . ") as sum_filed  FROM " . $table_name . " " . $cond;
+    $statement = $conn->query($sql_get);
+    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($results as $result) {
+        $sum_filed = $result['sum_filed'];
+    }
+    echo $sum_filed;
+}
+
