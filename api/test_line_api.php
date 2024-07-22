@@ -46,7 +46,7 @@ function sendMessage($userId, $messageText) {
 
 // ตัวอย่างการส่งข้อความไปยังผู้ใช้หลายคน
 $users = [
-    'beckpalmx' => 'Hello, User 1!',
+    'U3c52076b86c56ac637be65188e6c4f6c' => 'Hello, User 1!',
     'numberoek' => 'Hello, User 2!',
     // เพิ่มผู้ใช้และข้อความที่ต้องการส่ง
 ];
@@ -55,4 +55,4 @@ foreach ($users as $userId => $message) {
     $result = sendMessage($userId, $message);
     echo "Message sent to $userId: $result\n";
 }
-?>
+

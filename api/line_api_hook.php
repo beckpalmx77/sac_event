@@ -6,6 +6,11 @@ $arrayHeader[] = "Content-Type: application/json";
 $arrayHeader[] = "Authorization: Bearer {$accessToken}";   //รับข้อความจากผู้ใช้
 $message = $arrayJson['events'][0]['message']['text'];   //รับ id ของผู้ใช้
 $id = $arrayJson['events'][0]['source']['userId'];   #ตัวอย่าง Message Type "Text + Sticker"
+
+$myfile = fopen("permission-param.txt", "w") or die("Unable to open file!");
+fwrite($myfile, "ID = " . $id);
+fclose($myfile);
+
 if($message == "สวัสดี"){
     $arrayPostData['to'] = $id;
     $arrayPostData['messages'][0]['type'] = "text";
