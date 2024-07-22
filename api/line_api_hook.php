@@ -1,15 +1,15 @@
 <?php
-$accessToken = 'lbqZr1z3xLpzKlwoHzYNU3WrC/mQVM70huk1Px/h/0JEbG4wuV45xZEYdDJ8viUAoGIgVi6rV+7NgZxp3nmtCn6mnazWJCbk/I0++o+JRr9nrL8C+o21uoNpm0xqFgtRdukCMxaF7ZuJ3eZvF7/DLQdB04t89/1O/w1cDnyilFU=';
-$content = file_get_contents('php://input');
+
+
+$accessToken = 'Shw8xgMW5E9qSgkqGUykrY+YZLAT+PcaM2pdutHSloNWDPMPqjbfrHUycRoM7txPoGIgVi6rV+7NgZxp3nmtCn6mnazWJCbk/I0++o+JRr/j8HP4qSxCksI1E9LlvVozjmywwOS/gqz8maqOcXrofwdB04t89/1O/w1cDnyilFU=';
+
+$content = file_put_contents('log_api.json', file_get_contents('php://input') . PHP_EOL, FILE_APPEND);
+
 $arrayJson = json_decode($content, true);   $arrayHeader = array();
 $arrayHeader[] = "Content-Type: application/json";
 $arrayHeader[] = "Authorization: Bearer {$accessToken}";   //รับข้อความจากผู้ใช้
 $message = $arrayJson['events'][0]['message']['text'];   //รับ id ของผู้ใช้
 $id = $arrayJson['events'][0]['source']['userId'];   #ตัวอย่าง Message Type "Text + Sticker"
-
-$myfile = fopen("permission-param.txt", "w") or die("Unable to open file!");
-fwrite($myfile, "ID = " . $id);
-fclose($myfile);
 
 if($message == "สวัสดี"){
     $arrayPostData['to'] = $id;
@@ -31,4 +31,3 @@ if($message == "สวัสดี"){
     $result = curl_exec($ch);
     curl_close ($ch);
 }   exit;
-?>
