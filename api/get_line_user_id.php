@@ -1,12 +1,24 @@
 <?php
-// Path to the JSON file
-$filePath = 'log_api.json';
 
+include 'delete_file.php';
+
+// Path to the JSON file
+$filename = 'log_api.json';
+
+/*
 $mysql_host = "171.100.56.194";
 $mysql_port = "3307";
 $mysql_db_name = "sac_event";
 $mysql_user = "myadmin";
 $mysql_pass = "myadmin";
+*/
+
+$mysql_host = "localhost";
+$mysql_port = "3306";
+$mysql_db_name = "themedia_thaidatabase";
+$mysql_user = "themedia_themedia";
+$mysql_pass = "AsdZxc007";
+
 
 try
 {
@@ -22,7 +34,7 @@ catch (PDOException $e)
 
 
 // Read the file contents
-$jsonContent = file_get_contents($filePath);
+$jsonContent = file_get_contents($filename);
 
 // Decode the JSON data to a PHP associative array
 $data = json_decode($jsonContent, true);
@@ -37,11 +49,27 @@ if (json_last_error() === JSON_ERROR_NONE) {
             if (isset($event['source']['userId'])) {
                 echo 'User ID: ' . $event['source']['userId'] . PHP_EOL;
 
-                $sql_find = "SELECT * FROM evs_sale_name WHERE label = '" . $event['source']['userId'] . "'";
+                $sql_find = "SELECT * FROM evs_sale_name WHERE sale_line_token = '" . $event['source']['userId'] . "'";
                 $sale_line_token = $event['source']['userId'];
                 $nRows = $conn->query($sql_find)->fetchColumn();
                 if ($nRows > 0) {
                     echo $dup;
+                    //delete($filename);
+                    try {
+                        if (file_exists($filename)) {
+                            if (unlink($filename)) {
+                                echo "File deleted successfully.";
+                            } else {
+                                throw new Exception("Error deleting the file.");
+                            }
+                        } else {
+                            throw new Exception("File does not exist.");
+                        }
+                    } catch (Exception $e) {
+                        echo "An error occurred: " . $e->getMessage();
+                    }
+
+
                 } else {
 
                     $sql = "INSERT INTO evs_sale_name (sale_line_token) 
@@ -52,6 +80,23 @@ if (json_last_error() === JSON_ERROR_NONE) {
                     $lastInsertId = $conn->lastInsertId();
                     if ($lastInsertId) {
                         echo $save_success;
+                        //delete($filename);
+
+                        try {
+                            if (file_exists($filename)) {
+                                if (unlink($filename)) {
+                                    echo "File deleted successfully.";
+                                } else {
+                                    throw new Exception("Error deleting the file.");
+                                }
+                            } else {
+                                throw new Exception("File does not exist.");
+                            }
+                        } catch (Exception $e) {
+                            echo "An error occurred: " . $e->getMessage();
+                        }
+
+
                     } else {
                         echo $error;
                     }
