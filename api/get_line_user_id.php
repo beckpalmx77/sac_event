@@ -1,103 +1,83 @@
 <?php
 
-include 'delete_file.php';
-
-// Path to the JSON file
-$filename = 'log_api.json';
-
-/*
-$mysql_host = "171.100.56.194";
-$mysql_port = "3307";
-$mysql_db_name = "sac_event";
-$mysql_user = "myadmin";
-$mysql_pass = "myadmin";
-*/
-
 $mysql_host = "localhost";
 $mysql_port = "3306";
 $mysql_db_name = "themedia_thaidatabase";
 $mysql_user = "themedia_themedia";
 $mysql_pass = "AsdZxc007";
 
-
-try
-{
-    $conn = new PDO("mysql:host=".$mysql_host.";dbname=".$mysql_db_name.";port=" .$mysql_port,$mysql_user, $mysql_pass
-        ,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+try {
+    $conn = new PDO("mysql:host=$mysql_host;dbname=$mysql_db_name;port=$mysql_port;charset=utf8", $mysql_user, $mysql_pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (PDOException $e)
-{
-    echo "Error: " . $e->getMessage();
-    exit("Error: " . $e->getMessage());
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+    exit;
 }
 
+$filename = 'log_api.json';
 
-// Read the file contents
-$jsonContent = file_get_contents($filename);
+// Read the entire JSON file
+$json_data = file_get_contents($filename);
 
-// Decode the JSON data to a PHP associative array
-$data = json_decode($jsonContent, true);
+// Split JSON data by lines (assuming each line is a separate JSON object)
+$lines = explode("\n", $json_data);
 
-// Check if the data was decoded correctly
-if (json_last_error() === JSON_ERROR_NONE) {
-    // Accessing values from the decoded array
-    // Check if 'events' key exists and is an array
-    if (isset($data['events']) && is_array($data['events'])) {
-        foreach ($data['events'] as $event) {
-            // Check if 'source' and 'userId' keys exist
-            if (isset($event['source']['userId'])) {
-                echo 'User ID: ' . $event['source']['userId'] . PHP_EOL;
+foreach ($lines as $line) {
+    if (!empty($line)) {
+        // Decode JSON data for each line
+        $data = json_decode($line, true);
 
-                $sql_find = "SELECT * FROM evs_sale_name WHERE sale_line_token = '" . $event['source']['userId'] . "'";
-                $sale_line_token = $event['source']['userId'];
-                $nRows = $conn->query($sql_find)->fetchColumn();
-                if ($nRows > 0) {
-                    echo $dup;
-                    //delete($filename);
+        // Accessing values
+        $destination = $data['destination'];
+        $events = $data['events'];
 
-                } else {
+        // Loop through each event
+        foreach ($events as $event) {
+            $type = $event['type'];
+            $messageType = $event['message']['type'];
+            $messageId = $event['message']['id'];
+            $quoteToken = $event['message']['quoteToken'];
+            $messageText = $event['message']['text'];
+            $webhookEventId = $event['webhookEventId'];
+            $isRedelivery = $event['deliveryContext']['isRedelivery'];
+            $timestamp = $event['timestamp'];
+            $sourceType = $event['source']['type'];
+            $userId = $event['source']['userId'];
+            $replyToken = $event['replyToken'];
+            $mode = $event['mode'];
 
-                    $sql = "INSERT INTO evs_sale_name (sale_line_token) 
-                            VALUES (:sale_line_token)";
-                    $query = $conn->prepare($sql);
-                    $query->bindParam(':sale_line_token', $sale_line_token, PDO::PARAM_STR);
-                    $query->execute();
-                    $lastInsertId = $conn->lastInsertId();
-                    if ($lastInsertId) {
-                        echo $save_success;
-                        //delete($filename);
-                        
-                    } else {
-                        echo $error;
-                    }
+            $sql_find = "SELECT * FROM evs_line_message WHERE message_id = '" . $messageId . "'";
+            $nRows = $conn->query($sql_find)->fetchColumn();
+            if ($nRows <= 0) {
 
+                // Prepare SQL statement to insert data into MySQL
+                $sql = "INSERT INTO evs_line_message (type, message_type, message_id, quote_token, message_text, webhook_event_id, is_redelivery, timestamp, source_type, user_id, reply_token, mode)
+                    VALUES (:type, :message_type, :message_id, :quote_token, :message_text, :webhook_event_id, :is_redelivery, :timestamp, :source_type, :user_id, :reply_token, :mode)";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':type', $type, PDO::PARAM_STR);
+                $stmt->bindParam(':message_type', $messageType, PDO::PARAM_STR);
+                $stmt->bindParam(':message_id', $messageId, PDO::PARAM_STR);
+                $stmt->bindParam(':quote_token', $quoteToken, PDO::PARAM_STR);
+                $stmt->bindParam(':message_text', $messageText, PDO::PARAM_STR);
+                $stmt->bindParam(':webhook_event_id', $webhookEventId, PDO::PARAM_STR);
+                $stmt->bindParam(':is_redelivery', $isRedelivery, PDO::PARAM_BOOL);
+                $stmt->bindParam(':timestamp', $timestamp, PDO::PARAM_INT);
+                $stmt->bindParam(':source_type', $sourceType, PDO::PARAM_STR);
+                $stmt->bindParam(':user_id', $userId, PDO::PARAM_STR);
+                $stmt->bindParam(':reply_token', $replyToken, PDO::PARAM_STR);
+                $stmt->bindParam(':mode', $mode, PDO::PARAM_STR);
+
+                // Execute the SQL statement
+                try {
+                    $stmt->execute();
+                    echo "Inserted data successfully for event with timestamp: $timestamp\n";
+                } catch (PDOException $e) {
+                    echo "Error inserting data: " . $e->getMessage() . "\n";
                 }
-
-            } else {
-                echo 'User ID key does not exist in the event' . PHP_EOL;
             }
         }
-    } else {
-        echo 'Events key does not exist or is not an array' . PHP_EOL;
     }
-} else {
-    // Handle JSON decode error
-    echo 'Failed to decode JSON: ' . json_last_error_msg();
 }
 
-function Delete($FileName) {
-    try {
-        if (file_exists($FileName)) {
-            if (unlink($FileName)) {
-                echo "File deleted successfully.";
-            } else {
-                throw new Exception("Error deleting the file.");
-            }
-        } else {
-            throw new Exception("File does not exist.");
-        }
-    } catch (Exception $e) {
-        echo "An error occurred: " . $e->getMessage();
-    }
-}
+

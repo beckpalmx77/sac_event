@@ -1,4 +1,5 @@
 <?php
+
 // Channel Access Token จาก LINE Developers Console (long-lived)
 $access_token = 'Shw8xgMW5E9qSgkqGUykrY+YZLAT+PcaM2pdutHSloNWDPMPqjbfrHUycRoM7txPoGIgVi6rV+7NgZxp3nmtCn6mnazWJCbk/I0++o+JRr/j8HP4qSxCksI1E9LlvVozjmywwOS/gqz8maqOcXrofwdB04t89/1O/w1cDnyilFU=';
 
@@ -45,8 +46,11 @@ function sendMessage($userId, $messageText) {
 }
 
 // ตัวอย่างการส่งข้อความไปยังผู้ใช้หลายคน
+
+/*
 $users = [
-    'U819e0fa74e0a1f4c0df7b46b346da789' => '9999999',
+    'U819e0fa74e0a1f4c0df7b46b346da789' => 'Hello, User 1!',
+    'U8c2d4aac5e422daa1c1f739b4885250e' => 'Hello, User Kanoon!',
 
     // เพิ่มผู้ใช้และข้อความที่ต้องการส่ง
 ];
@@ -55,4 +59,6 @@ foreach ($users as $userId => $message) {
     $result = sendMessage($userId, $message);
     echo "Message sent to $userId: $result\n";
 }
+
+*/
 

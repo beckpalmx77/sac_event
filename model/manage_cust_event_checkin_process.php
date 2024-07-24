@@ -7,6 +7,7 @@ include('../config/lang.php');
 include('../util/record_util.php');
 include('../util/reorder_record.php');
 include('../util/thai_date_util.php');
+include('../util/send_line_msg.php');
 
 if ($_POST["action"] === 'GET_DATA') {
 
@@ -100,6 +101,8 @@ if ($_POST["action"] === 'CONFIRM') {
     if ($_POST["id"] != '') {
 
         $id = $_POST["id"];
+        $ar_name = $_POST["ar_name"];
+        $sale_contact_name = $_POST["sale_contact_name"];
         $cust_name_1 = $_POST["cust_name_1"];
         $cust_name_2 = $_POST["cust_name_2"];
         $cust_name_3 = $_POST["cust_name_3"];
@@ -139,6 +142,17 @@ if ($_POST["action"] === 'CONFIRM') {
                 $query->bindParam(':id', $id, PDO::PARAM_STR);
                 $query->execute();
                 echo $save_success;
+
+                $sql_sale_line = $sale_contact_name ;
+                $sql_sale_line = "SELECT esn.sale_line_token AS data FROM evs_sale_name esn WHERE esn.sale_name_desc = '" . $sale_contact_name . "'";
+                $line_user_id = GET_VALUE($conn, $sql_sale_line);
+                $msg = $ar_name . " : " . $cust_name_1 .  " : " . $phone . " Check In " . $check_in_date;
+
+                if ($line_user_id!=='-') {
+                    sendMessage($line_user_id, $message);
+                }
+
+
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();
             }

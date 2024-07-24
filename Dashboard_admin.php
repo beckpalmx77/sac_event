@@ -486,52 +486,6 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
 
     </script>
 
-    <!--script>
-
-        function GET_DATA(table_name, idx) {
-            let input_text = document.getElementById("Text" + idx);
-            let action = "GET_COUNT_RECORDS_COND";
-            let cond = "";
-            let field = "";
-            switch (idx) {
-                case 1:
-                    action = "GET_COUNT_RECORDS";
-                    break;
-                case 2:
-                    action = "GET_SUM";
-                    cond = " Where check_in_status = 'Y'";
-                    field = "attendance_qty";
-                    break;
-                case 3:
-                    cond = " Where check_in_status = 'N'";
-                    break;
-            }
-
-            let formData = {action: action, table_name: table_name,field:field, cond: cond};
-            $.ajax({
-                type: "POST",
-                url: 'model/manage_general_data.php',
-                data: formData,
-                success: function (response) {
-                    input_text.innerHTML = response;
-                },
-                error: function (response) {
-                    alertify.error("error : " + response);
-                }
-            });
-
-            let value1 = document.getElementById("Text1").innerText;
-            let value2 = document.getElementById("Text2").innerText;
-            let number1 = parseFloat(value1);
-            let number2 = parseFloat(value2);
-            let result = (number2 * 100) / number1;
-            result = isNaN(result) ? 0 : result.toFixed(2);
-            document.getElementById("Text-Percent").innerText = result;
-        }
-
-    </script-->
-
-
     <script>
 
         //select sum(register_qty) AS sum_register_qty from evs_event_checkin where check_in_status = 'Y'
