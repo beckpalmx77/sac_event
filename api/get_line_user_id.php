@@ -55,20 +55,6 @@ if (json_last_error() === JSON_ERROR_NONE) {
                 if ($nRows > 0) {
                     echo $dup;
                     //delete($filename);
-                    try {
-                        if (file_exists($filename)) {
-                            if (unlink($filename)) {
-                                echo "File deleted successfully.";
-                            } else {
-                                throw new Exception("Error deleting the file.");
-                            }
-                        } else {
-                            throw new Exception("File does not exist.");
-                        }
-                    } catch (Exception $e) {
-                        echo "An error occurred: " . $e->getMessage();
-                    }
-
 
                 } else {
 
@@ -81,22 +67,7 @@ if (json_last_error() === JSON_ERROR_NONE) {
                     if ($lastInsertId) {
                         echo $save_success;
                         //delete($filename);
-
-                        try {
-                            if (file_exists($filename)) {
-                                if (unlink($filename)) {
-                                    echo "File deleted successfully.";
-                                } else {
-                                    throw new Exception("Error deleting the file.");
-                                }
-                            } else {
-                                throw new Exception("File does not exist.");
-                            }
-                        } catch (Exception $e) {
-                            echo "An error occurred: " . $e->getMessage();
-                        }
-
-
+                        
                     } else {
                         echo $error;
                     }
@@ -115,3 +86,18 @@ if (json_last_error() === JSON_ERROR_NONE) {
     echo 'Failed to decode JSON: ' . json_last_error_msg();
 }
 
+function Delete($FileName) {
+    try {
+        if (file_exists($FileName)) {
+            if (unlink($FileName)) {
+                echo "File deleted successfully.";
+            } else {
+                throw new Exception("Error deleting the file.");
+            }
+        } else {
+            throw new Exception("File does not exist.");
+        }
+    } catch (Exception $e) {
+        echo "An error occurred: " . $e->getMessage();
+    }
+}
