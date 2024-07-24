@@ -8,6 +8,7 @@ include('../util/record_util.php');
 include('../util/reorder_record.php');
 include('../util/thai_date_util.php');
 include('../util/send_line_msg.php');
+include('../util/GetData.php');
 
 if ($_POST["action"] === 'GET_DATA') {
 
@@ -141,17 +142,17 @@ if ($_POST["action"] === 'CONFIRM') {
                 $query->bindParam(':check_in_status', $check_in_status, PDO::PARAM_STR);
                 $query->bindParam(':id', $id, PDO::PARAM_STR);
                 $query->execute();
-                echo $save_success;
 
                 $sql_sale_line = $sale_contact_name ;
                 $sql_sale_line = "SELECT esn.sale_line_token AS data FROM evs_sale_name esn WHERE esn.sale_name_desc = '" . $sale_contact_name . "'";
                 $line_user_id = GET_VALUE($conn, $sql_sale_line);
                 $msg = $ar_name . " : " . $cust_name_1 .  " : " . $phone . " Check In " . $check_in_date;
 
-                if ($line_user_id!=='-') {
-                    sendMessage($line_user_id, $message);
-                }
+                $access_token = 'Shw8xgMW5E9qSgkqGUykrY+YZLAT+PcaM2pdutHSloNWDPMPqjbfrHUycRoM7txPoGIgVi6rV+7NgZxp3nmtCn6mnazWJCbk/I0++o+JRr/j8HP4qSxCksI1E9LlvVozjmywwOS/gqz8maqOcXrofwdB04t89/1O/w1cDnyilFU=';
 
+                send_Message($access_token,$line_user_id,$msg);
+
+                echo $save_success;
 
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();

@@ -1,12 +1,9 @@
 <?php
 
-// Channel Access Token จาก LINE Developers Console (long-lived)
-$access_token = 'Shw8xgMW5E9qSgkqGUykrY+YZLAT+PcaM2pdutHSloNWDPMPqjbfrHUycRoM7txPoGIgVi6rV+7NgZxp3nmtCn6mnazWJCbk/I0++o+JRr/j8HP4qSxCksI1E9LlvVozjmywwOS/gqz8maqOcXrofwdB04t89/1O/w1cDnyilFU=';
-
 // ฟังก์ชันสำหรับส่งข้อความ
-function sendMessage($userId, $messageText) {
-    global $access_token;
+function send_Message($access_token,$userId, $messageText) {
 
+    //global $access_token;
     $url = 'https://api.line.me/v2/bot/message/push';
     $headers = [
         'Content-Type: application/json',
