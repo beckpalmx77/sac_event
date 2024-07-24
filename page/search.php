@@ -3,7 +3,7 @@ include '..\config\connect_db.php';
 
 if (isset($_POST['query'])) {
     $query = $_POST['query'];
-    $stmt = $conn->prepare("SELECT * FROM v_event_checkin WHERE ar_name LIKE :query OR phone LIKE :query");
+    $stmt = $conn->prepare("SELECT * FROM v_event_checkin WHERE ar_name LIKE :query OR phone LIKE :query OR cust_name_1 LIKE :query ");
     $stmt->execute(['query' => "%$query%"]);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
