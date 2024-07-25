@@ -16,8 +16,8 @@ if (isset($_POST['query'])) {
             echo '<label for="c-form-name">';
             echo '<span class="label-text">ข้อมูลที่ค้นพบ :</span>';
             echo '</label>';
-            echo '<h3 class="card-title">' . htmlspecialchars($row['ar_name']) . '</h3>';
-            echo '<h3 class="card-title">' . htmlspecialchars($row['phone']) . '</h3>';
+            echo '<h3 class="card-title">' . "<b>" . htmlspecialchars($row['ar_name']) . '</b></h3>';
+            echo '<h3 class="card-title">' . "<b>" . htmlspecialchars($row['phone']) . '</b></h3>';
             echo '<h3 class="card-title">' . "หมายเลขโต๊ะ : " . "<b>" . htmlspecialchars($row['table_number']) . '</b></h3>';
             echo '</div>';
             echo '</div>';
