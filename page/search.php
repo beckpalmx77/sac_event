@@ -18,7 +18,7 @@ if (isset($_POST['query'])) {
             echo '</label>';
             echo '<h3 class="card-title">' . htmlspecialchars($row['ar_name']) . '</h3>';
             echo '<h3 class="card-title">' . htmlspecialchars($row['phone']) . '</h3>';
-            echo '<h3 class="card-title">' . "หมายเลขโต๊ะ : " . htmlspecialchars($row['table_number']) . '</h3>';
+            echo '<h3 class="card-title">' . "หมายเลขโต๊ะ : " . "<b>" . htmlspecialchars($row['table_number']) . '</b></h3>';
             echo '</div>';
             echo '</div>';
             echo '</div>';

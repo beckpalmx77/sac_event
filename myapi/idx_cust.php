@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta ar_name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Search</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="container mt-5">
-    <h1>Search Customer Data</h1>
+    <h1>Search Customers</h1>
     <form id="searchForm">
         <div class="form-group">
-            <label for="ar_name">Name</label>
+            <label for="ar_name">ar_name</label>
             <input type="text" class="form-control" id="ar_name" name="ar_name">
         </div>
         <div class="form-group">
-            <label for="phone">Phone</label>
+            <label for="phone">phone</label>
             <input type="text" class="form-control" id="phone" name="phone">
         </div>
         <button type="submit" class="btn btn-primary">Search</button>
@@ -32,24 +32,22 @@
             e.preventDefault();
             const ar_name = $('#ar_name').val();
             const phone = $('#phone').val();
+
+            //url: 'search_cust.php',
+
             $.ajax({
-                url: 'http://171.100.56.194:8999/sac_event/myapi/api_cust.php', // เปลี่ยน URL ให้ตรงกับที่ตั้งของ API
+                url: 'http://171.100.56.194:8999/sac_event/myapi/search_cust.php',
                 method: 'GET',
                 data: { ar_name: ar_name, phone: phone },
                 success: function(data) {
                     $('#results').empty();
-                    if (data.length > 0) {
-                        data.forEach(function(v_event_checkin) {
-                            $('#results').append('<li class="list-group-item">' + v_event_checkin.ar_name + ' - ' + v_event_checkin.phone + ' หมายเลขโต๊ะ : ' + v_event_checkin.table_number + '</li>');
-                        });
-                    } else {
-                        $('#results').append('<li class="list-group-item text-warning">No results found.</li>');
-                    }
+                    data.forEach(function(customer) {
+                        $('#results').append('<li class="list-group-item">' + customer.ar_name + ' - ' + customer.phone + ' - ' + customer.table_number + '</li>');
+                    });
                 },
-                error: function(xhr) {
+                error: function() {
                     $('#results').empty();
-                    const response = JSON.parse(xhr.responseText);
-                    $('#results').append('<li class="list-group-item text-danger">Error: ' + response.error + '</li>');
+                    $('#results').append('<li class="list-group-item text-danger">There was an error processing your request.</li>');
                 }
             });
         });
@@ -57,3 +55,4 @@
 </script>
 </body>
 </html>
+
