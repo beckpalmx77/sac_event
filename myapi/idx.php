@@ -34,7 +34,7 @@
             const phone = $('#phone').val();
 
             $.ajax({
-                url: 'api.php',
+                url: 'http://171.100.56.194:8999/sac_event/myapi/api.php',
                 method: 'GET',
                 data: { ar_name: ar_name, phone: phone },
                 success: function(data) {
