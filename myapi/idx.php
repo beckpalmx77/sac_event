@@ -40,7 +40,7 @@
                 success: function(data) {
                     $('#results').empty();
                     data.forEach(function(customer) {
-                        $('#results').append('<li class="list-group-item">' + customer.ar_name + ' - ' + customer.phone + ' - ' + customer.phone + '</li>');
+                        $('#results').append('<li class="list-group-item">' + customer.ar_name + ' - ' + customer.phone + ' หมายเลขโต๊ะ : ' + customer.phone + '</li>');
                     });
                 },
                 error: function() {
