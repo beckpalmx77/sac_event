@@ -1,7 +1,7 @@
 <?php
 include "../config/connect_db.php";
 
-$stmt = $conn->prepare("SELECT cust_id,ar_name,cust_name_1,phone FROM evs_customer");
+$stmt = $conn->prepare("SELECT cust_id,ar_name,cust_name_1,phone FROM evs_customer order by id DESC");
 $stmt->execute();
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
