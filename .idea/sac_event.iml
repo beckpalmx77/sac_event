@@ -4,6 +4,13 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/PhpAmqpLib/Channel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/PhpAmqpLib/Connection" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/PhpAmqpLib/Exception" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/PhpAmqpLib/Exchange" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/PhpAmqpLib/Helper" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/PhpAmqpLib/Message" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/PhpAmqpLib/Wire" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
