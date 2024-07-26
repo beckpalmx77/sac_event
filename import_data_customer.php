@@ -139,32 +139,12 @@ include('includes/Footer.php');
 
 <script>
     $(document).ready(function () {
-/*
-        $('#uploadForm').on('submit', function (e) {
-            e.preventDefault();
-            let formData = new FormData(this);
-            //alert(formData);
-            $.ajax({
-                url: 'import_cust_data.php',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    $('#uploadResult').html(response);
-                    $('#TableRecordList').DataTable().ajax.reload();
-                    //alertify.alert("Success");
-                }
-            });
-        });
-
- */
 
         $('#uploadForm').on('submit', function (e) {
             e.preventDefault();
             let formData = new FormData(this);
             $.ajax({
-                url: 'import_cust_data.php',
+                url: 'import_process/import_cust_data.php',
                 type: 'POST',
                 data: formData,
                 contentType: false,
