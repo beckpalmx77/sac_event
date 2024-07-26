@@ -163,6 +163,7 @@ include('includes/Footer.php');
         $('#TableRecordList').DataTable({
             "lengthMenu": [[5, 10, 20, 50, 100], [5, 10, 20, 50, 100]],
             "ajax": "model/fetch_cust_data.php",
+            "order": [[0, 'desc']],
             "columns": [
                 {"data": "cust_id"},
                 {"data": "ar_name"},
