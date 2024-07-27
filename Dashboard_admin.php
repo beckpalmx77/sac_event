@@ -658,6 +658,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         let check_in_status = response[i].check_in_status;
                         let check_in_status_display = response[i].check_in_status === "Y" ? "Check In แล้ว" : "ยังไม่ได้ Check In";
                         let table_number = response[i].table_number;
+                        let register_qty = response[i].register_qty;
                         let attendance_qty = response[i].attendance_qty;
                         let sale_contact_name = response[i].sale_contact_name;
 
@@ -688,6 +689,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         $('#table_number').css('color', 'blue');
                         $("#table_number").css("fontSize", "30px");
                         $('#table_number').val(table_number);
+                        $('#register_qty').val(register_qty);
                         $('#attendance_qty').val(attendance_qty);
                         $('#sale_contact_name').val(sale_contact_name);
                         $('.modal-title').html("<i class='fa fa-plus'></i> Check In Record");
