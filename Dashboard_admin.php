@@ -400,10 +400,12 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                         <div class="modal-footer">
                                                             <input type="hidden" name="id" id="id"/>
                                                             <input type="hidden" name="action" id="action" value=""/>
-                                                            <button type="button" id="DetailButton" name="DetailButton" class="btn btn-success">Update <i
+                                                            <button type="button" id="DetailButton" name="DetailButton"
+                                                                    class="btn btn-success">Update <i
                                                                         class="fa fa-check"></i>
                                                             </button>
-                                                            <button type="button" id="printButton" name="printButton" class="btn btn-info">Print <i
+                                                            <button type="button" id="printButton" name="printButton"
+                                                                    class="btn btn-info">Print <i
                                                                         class="fa fa-print"></i>
                                                             </button>
 
@@ -601,12 +603,15 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         url: 'model/manage_cust_event_checkin_process.php',
                         method: "POST",
                         data: formData,
-                        success: function (data) {
+                        success: function(data) {
                             alertify.success(data);
                             $('#recordForm')[0].reset();
                             $('#recordModal').modal('hide');
                             $('#save').attr('disabled', false);
-                            dataRecords.ajax.reload();
+                            dataRecords.ajax.reload(null, false); // Reload data without resetting pagination
+                        },
+                        error: function(xhr, status, error) {
+                            alertify.error('Error: ' + error);
                         }
                     })
                 } else {
@@ -817,6 +822,12 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                 }
             });
         });
+    </script>
+
+    <script>
+        function Refresh() {
+            $('#TableRecordList').DataTable().ajax.reload();
+        }
     </script>
 
     </body>
