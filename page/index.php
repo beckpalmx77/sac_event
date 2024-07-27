@@ -25,11 +25,6 @@
 
     <!-- Favicon and touch icons -->
     <link rel="shortcut icon" href="img/logo.png">
-    <!--link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png"-->
-
 </head>
 
 <body>
@@ -85,26 +80,6 @@
 <!--[if lt IE 10]>
 <script src="assets/js/placeholder.js"></script>
 <![endif]-->
-
-<!--script>
-    $(document).ready(function () {
-        $('#searchText').on('keyup', function () {
-            let query = $(this).val();
-            if (query.length >= 2) { // ค้นหาหลังจากพิมพ์เกิน 2 ตัวอักษร
-                $.ajax({
-                    url: 'search.php',
-                    method: 'POST',
-                    data: {query: query},
-                    success: function (data) {
-                        $('#result').html(data);
-                    }
-                });
-            } else {
-                $('#result').html(''); // ล้างผลลัพธ์เมื่อไม่มีคำค้นหา
-            }
-        });
-    });
-</script-->
 
 <script>
     $(document).ready(function() {

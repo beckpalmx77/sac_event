@@ -47,7 +47,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                 height: 100%; */
                 margin: 0;
                 padding: 0;
-                font-size: 20pt; /* Adjust font size for print */
+                font-size: 16pt; /* Adjust font size for print */
                 justify-content: center;
                 align-items: center;
                 text-align: center;
@@ -423,7 +423,9 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
 
                                                     <div id="printArea" class="d-none mt-5">
                                                         <br>
-                                                        <h4>10ปี SAC สงวนออโต้คาร์</h4>
+                                                        <h4>SAC สงวนออโต้คาร์</h4>
+                                                        <h4>10 YEARS ANNIVERSARY</h4>
+                                                        <h4>CONNECT THE POWER 2024</h4>
                                                         <h4>21 กันยายน 2567</h4>
                                                         <p id="printName"></p>
                                                         <p id="printPhone"></p>
@@ -786,28 +788,33 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
     </script>
 
     <script>
-        $(document).ready(function() {
-            $('#printButton').on('click', function() {
-                let formData = $('#recordForm').serialize();
-                $.ajax({
-                    type: 'POST',
-                    url: 'export_process/print_event_chk_in.php',
-                    data: formData,
-                    success: function(response) {
-                        let data = JSON.parse(response);
-                        $('#printName').text('ชื่อ: ' + data.ar_name);
-                        $('#printPhone').text('หมายเลขโทรศัพท์: ' + data.phone);
-                        $('#printTableNumber').text('หมายเลขโต๊ะ: ' + data.table_number);
-
-                        $('#printArea').removeClass('d-none');
-                        window.print();  // สั่งพิมพ์หน้าเว็บ
-                        // Show the form again after printing
-                        $('#recordForm').show();
-                        $('#printArea').addClass('d-none');
+        $("#recordModal").on('click', '#printButton', function (event) {
+            event.preventDefault();
+            //let idx = $(this).attr("id");
+            let id = $('#id').val();
+            //alert(id);
+            let formData = {action: "GET_DATA", id: id};
+            $.ajax({
+                type: "POST",
+                url: 'model/manage_cust_event_checkin_process.php',
+                dataType: "json",
+                data: formData,
+                success: function (response) {
+                    let len = response.length;
+                    for (let i = 0; i < len; i++) {
+                        let ar_name = response[i].ar_name;
+                        let phone = response[i].phone;
+                        let table_number = response[i].table_number;
+                        let url = "print_slip.php?title=สงวนออโต้คาร์(SAC)"
+                            + '&ar_name=' + ar_name + '&phone=' + phone
+                            + '&table_number=' + table_number
+                            + '&action=PRINT';
+                        window.open(url, "_blank");
                     }
-                });
-
-
+                },
+                error: function (response) {
+                    alertify.error("error : " + response);
+                }
             });
         });
     </script>
