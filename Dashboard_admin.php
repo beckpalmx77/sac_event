@@ -187,6 +187,10 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                         <div class="medium-text font-weight-bold text-uppercase mb-1 "
                                              style="color: #8F35F6;">
                                             ลงทะเบียนเข้างาน
+                                            <button type='button' name='btnRefresh' id='btnRefresh'
+                                                    class='btn btn-success btn-xs' onclick="ReloadDataTable();">Refresh
+                                                <i class="fa fa-refresh"></i>
+                                            </button>
                                         </div>
                                         <div class="col-md-12 col-md-offset-2">
                                             <table id='TableRecordList' class='display dataTable'>
@@ -501,6 +505,10 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                 GET_DATA("evs_event_checkin", 3);
             }, 3000);
 
+            setInterval(function () {
+                ReloadDataTable();
+            }, 7000);
+
         });
 
     </script>
@@ -603,14 +611,14 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         url: 'model/manage_cust_event_checkin_process.php',
                         method: "POST",
                         data: formData,
-                        success: function(data) {
+                        success: function (data) {
                             alertify.success(data);
                             $('#recordForm')[0].reset();
                             $('#recordModal').modal('hide');
                             $('#save').attr('disabled', false);
                             dataRecords.ajax.reload(null, false); // Reload data without resetting pagination
                         },
-                        error: function(xhr, status, error) {
+                        error: function (xhr, status, error) {
                             alertify.error('Error: ' + error);
                         }
                     })
@@ -824,11 +832,20 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
         });
     </script>
 
+    <!--script>
+        $(document).ready(function () {
+            $("#btnRefresh").click(function () {
+                $('#TableRecordList').DataTable().ajax.reload();
+            });
+        });
+    </script-->
+
     <script>
-        function Refresh() {
+        function ReloadDataTable() {
             $('#TableRecordList').DataTable().ajax.reload();
         }
     </script>
+
 
     </body>
 
