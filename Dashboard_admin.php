@@ -37,6 +37,47 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
             top: 30%;
         }
     </style>
+    <style>
+        @media print {
+            #printArea {
+                display: block; /* Show print area */
+                width: 4in;
+                height: 6in;
+                /* width: 100%;
+                height: 100%; */
+                margin: 0;
+                padding: 0;
+                font-size: 20pt; /* Adjust font size for print */
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                color: black;
+            }
+
+            #printArea p {
+                margin: 0.5in 0; /* Adjust spacing between paragraphs */
+            }
+
+            body * {
+                visibility: hidden; /* Hide everything except the print area */
+            }
+
+            #printArea,
+            #printArea * {
+                visibility: visible;
+            }
+
+            #printArea {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            #recordForm {
+                display: none; /* Hide the form during print */
+            }
+        }
+    </style>
 
     <div id="wrapper">
         <?php
@@ -157,7 +198,8 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                     <th>หมายเลขโทรศัพท์</th>
                                                     <th>จังหวัด</th>
                                                     <th>sale/ผู้ติดต่อ</th>
-                                                    <th>Check In Status</th>
+                                                    <th>โต๊ะ</th>
+                                                    <th>Check In</th>
                                                     <th>Action</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -170,7 +212,8 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                     <th>หมายเลขโทรศัพท์</th>
                                                     <th>จังหวัด</th>
                                                     <th>sale/ผู้ติดต่อ</th>
-                                                    <th>Check In Status</th>
+                                                    <th>โต๊ะ</th>
+                                                    <th>Check In</th>
                                                     <th>Action</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -357,9 +400,13 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                         <div class="modal-footer">
                                                             <input type="hidden" name="id" id="id"/>
                                                             <input type="hidden" name="action" id="action" value=""/>
-                                                            <button type="button" id="DeatilButton" name="DeatilButton" class="btn btn-success">Update <i
+                                                            <button type="button" id="DetailButton" name="DetailButton" class="btn btn-success">Update <i
                                                                         class="fa fa-check"></i>
                                                             </button>
+                                                            <button type="button" id="printButton" name="printButton" class="btn btn-info">Print <i
+                                                                        class="fa fa-print"></i>
+                                                            </button>
+
                                                             <span class="icon-input-btn">
                                                                 <i class="fa fa-check"></i>
                                                             <input type="submit" name="save" id="save"
@@ -372,6 +419,16 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                             </button>
                                                         </div>
                                                     </form>
+
+
+                                                    <div id="printArea" class="d-none mt-5">
+                                                        <br>
+                                                        <h4>10ปี SAC สงวนออโต้คาร์</h4>
+                                                        <h4>21 กันยายน 2567</h4>
+                                                        <p id="printName"></p>
+                                                        <p id="printPhone"></p>
+                                                        <p id="printTableNumber"></p>
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -525,6 +582,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                     {data: 'phone'},
                     {data: 'province_name'},
                     {data: 'sale_contact_name'},
+                    {data: 'table_number'},
                     {data: 'check_in_status'},
                     {data: 'detail'},
                     {data: 'update'}
@@ -706,7 +764,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
     </script>
 
     <script>
-        $("#recordModal").on('click', '#DeatilButton', function (event) {
+        $("#recordModal").on('click', '#DetailButton', function (event) {
             event.preventDefault();
             $('#save').attr('disabled', 'disabled');
             let formData = $('#recordForm').serialize();
@@ -724,6 +782,33 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                 }
             })
 
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#printButton').on('click', function() {
+                let formData = $('#recordForm').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'export_process/print_event_chk_in.php',
+                    data: formData,
+                    success: function(response) {
+                        let data = JSON.parse(response);
+                        $('#printName').text('ชื่อ: ' + data.ar_name);
+                        $('#printPhone').text('หมายเลขโทรศัพท์: ' + data.phone);
+                        $('#printTableNumber').text('หมายเลขโต๊ะ: ' + data.table_number);
+
+                        $('#printArea').removeClass('d-none');
+                        window.print();  // สั่งพิมพ์หน้าเว็บ
+                        // Show the form again after printing
+                        $('#recordForm').show();
+                        $('#printArea').addClass('d-none');
+                    }
+                });
+
+
+            });
         });
     </script>
 

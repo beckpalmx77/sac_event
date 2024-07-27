@@ -236,6 +236,8 @@ if ($_POST["action"] === 'GET_CUSTOMER_CHECKIN') {
     $empRecords = $stmt->fetchAll();
     $data = array();
 
+    $row_number = 0;
+
     foreach ($empRecords as $row) {
 
         if ($_POST['sub_action'] === "GET_MASTER") {
