@@ -1,6 +1,10 @@
 <?php
 include '..\config\connect_db.php';
 
+// ตั้งค่าชื่อไฟล์รูปภาพต้นฉบับและรูปภาพที่จะแสดงผล
+$imageFile = 'img_gen/sac_10.png';
+$outputFile = '';
+
 if (isset($_POST['query'])) {
     $query = $_POST['query'];
     $stmt = $conn->prepare("SELECT * FROM v_event_checkin WHERE ar_name LIKE :query OR phone LIKE :query OR cust_name_1 LIKE :query ");
@@ -10,6 +14,17 @@ if (isset($_POST['query'])) {
     if (count($results) > 0) {
         foreach ($results as $row) {
             echo '<br>';
+            $outputFile = 'img_gen/sac_10_' . $row['event_id'] . "-" . $row['id'] . ".png";
+
+            // ข้อความที่ต้องการแสดงบนรูปภาพ
+            $text = $row['ar_name'] . "\n\r";
+            $text .= "โทร " . $row['phone'] . "\n\r";
+            $text .= "โต๊ะหมายเลข " . $row['table_number'];
+
+            include 'gen_text_img.php';
+            echo '<div><img src="' . $outputFile . '" alt="' . basename($outputFile) . '" style="max-width:100%; height:auto;"/></div>';
+
+/*
             echo '<div class="c-form-top">';
             echo '<div class="c-form-top-left">';
             echo '<div class="form-group">';
@@ -22,6 +37,8 @@ if (isset($_POST['query'])) {
             echo '</div>';
             echo '</div>';
             echo '</div>';
+*/
+
         }
     } else {
             echo '<div class="alert alert-warning">ไม่พบข้อมูลตามที่ค้นหา</div>';
