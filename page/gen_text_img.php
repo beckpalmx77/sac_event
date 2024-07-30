@@ -17,9 +17,13 @@ if (!$image) {
 // กำหนดสีของข้อความ (RGB)
 $textColor = imagecolorallocate($image, 255, 255, 255); // สีขาว
 
-// ขนาดฟอนต์
-$fontSize = 14;
 
+if (strlen($text)>=115) {
+    $fontPath = __DIR__ . '/font/Prompt-SemiBold.ttf'; // ตั้งค่า path ของฟอนต์ TTF
+    $fontSize = 10;
+} else {
+    $fontSize = 14;
+}
 // มุมของข้อความ
 $angle = 0;
 

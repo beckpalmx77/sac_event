@@ -16,6 +16,7 @@ if (isset($_POST['query'])) {
             echo '<br>';
             $outputFile = 'img_gen/sac_10_' . $row['event_id'] . "-" . $row['id'] . ".png";
 
+            $text_chk = $row['ar_name'];
             // ข้อความที่ต้องการแสดงบนรูปภาพ
             $text = $row['ar_name'] . "\n\r";
             $text .= "โทร : " . $row['phone'] . "\n\r";
