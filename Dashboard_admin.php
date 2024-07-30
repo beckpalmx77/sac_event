@@ -834,14 +834,6 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
         });
     </script>
 
-    <!--script>
-        $(document).ready(function () {
-            $("#btnRefresh").click(function () {
-                $('#TableRecordList').DataTable().ajax.reload();
-            });
-        });
-    </script-->
-
     <script>
         function ReloadDataTable() {
             $('#TableRecordList').DataTable().ajax.reload();
