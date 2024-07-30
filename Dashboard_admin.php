@@ -584,7 +584,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                 'serverSide': true,
                 'serverMethod': 'post',
                 'ajax': {
-                    'url': 'model/manage_cust_event_checkin_process.php',
+                    'url': 'model/manage_customer_event_checkin_process.php',
                     'data': formData,
                 },
                 'columns': [
@@ -608,7 +608,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                     $('#save').attr('disabled', 'disabled');
                     let formData = $(this).serialize();
                     $.ajax({
-                        url: 'model/manage_cust_event_checkin_process.php',
+                        url: 'model/manage_customer_event_checkin_process.php',
                         method: "POST",
                         data: formData,
                         success: function (data) {
@@ -638,7 +638,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
             let formData = {action: "GET_DATA", id: id};
             $.ajax({
                 type: "POST",
-                url: 'model/manage_cust_event_checkin_process.php',
+                url: 'model/manage_customer_event_checkin_process.php',
                 dataType: "json",
                 data: formData,
                 success: function (response) {
@@ -713,7 +713,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
             let formData = {action: "GET_DATA", id: id};
             $.ajax({
                 type: "POST",
-                url: 'model/manage_cust_event_checkin_process.php',
+                url: 'model/manage_customer_event_checkin_process.php',
                 dataType: "json",
                 data: formData,
                 success: function (response) {
@@ -787,7 +787,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
             let formData = $('#recordForm').serialize();
             //alert(formData);
             $.ajax({
-                url: 'model/manage_cust_event_checkin_process.php',
+                url: 'model/manage_customer_event_checkin_process.php',
                 method: "POST",
                 data: formData,
                 success: function (data) {
@@ -811,7 +811,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
             let formData = {action: "GET_DATA", id: id};
             $.ajax({
                 type: "POST",
-                url: 'model/manage_cust_event_checkin_process.php',
+                url: 'model/manage_customer_event_checkin_process.php',
                 dataType: "json",
                 data: formData,
                 success: function (response) {
