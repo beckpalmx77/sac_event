@@ -18,9 +18,8 @@ if (isset($_POST['query'])) {
 
             // ข้อความที่ต้องการแสดงบนรูปภาพ
             $text = $row['ar_name'] . "\n\r";
-            $text .= "โทร " . $row['phone'] . "\n\r";
-            $text .= "โต๊ะหมายเลข " . $row['table_number'];
-
+            $text .= "โทร : " . $row['phone'] . "\n\r";
+            $text .= "โต๊ะหมายเลข : " . $row['table_number'];
             include 'gen_text_img.php';
             echo '<div><img src="' . $outputFile . '" alt="' . basename($outputFile) . '" style="max-width:100%; height:auto;"/></div>';
 
