@@ -3,6 +3,9 @@
 // ฟังก์ชันสำหรับส่งข้อความ
 function send_Message($access_token,$userId, $messageText) {
 
+    //Test User ID to Send LINE
+    //$userId = "U819e0fa74e0a1f4c0df7b46b346da789";
+
     //global $access_token;
     $url = 'https://api.line.me/v2/bot/message/push';
     $headers = [

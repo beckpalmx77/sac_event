@@ -143,10 +143,17 @@ if ($_POST["action"] === 'CONFIRM') {
                 $query->bindParam(':id', $id, PDO::PARAM_STR);
                 $query->execute();
 
-                $sql_sale_line = $sale_contact_name;
-                $sql_sale_line = "SELECT esn.sale_line_user_id AS data FROM evs_sale_name esn WHERE esn.sale_name_desc = '" . $sale_contact_name . "'";
+                $sale_contact_name = trim($sale_contact_name);
+                $sql_sale_line = "SELECT esn.sale_line_user_id AS data FROM evs_sale_name esn WHERE TRIM(esn.sale_name_desc) = '" . $sale_contact_name . "'";
                 $line_user_id = GET_VALUE($conn, $sql_sale_line);
                 $msg = $ar_name . " : " . $cust_name_1 . " : " . $phone . " Check In " . $check_in_date;
+
+/*
+                $txt = $sql_sale_line . " [ " . $line_user_id . " ] " . $msg;
+                $my_file = fopen("send_line_id.txt", "w") or die("Unable to open file!");
+                fwrite($my_file, $txt);
+                fclose($my_file);
+*/
 
                 $access_token = 'Shw8xgMW5E9qSgkqGUykrY+YZLAT+PcaM2pdutHSloNWDPMPqjbfrHUycRoM7txPoGIgVi6rV+7NgZxp3nmtCn6mnazWJCbk/I0++o+JRr/j8HP4qSxCksI1E9LlvVozjmywwOS/gqz8maqOcXrofwdB04t89/1O/w1cDnyilFU=';
 

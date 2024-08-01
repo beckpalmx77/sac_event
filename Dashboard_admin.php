@@ -302,7 +302,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                                                name="sale_contact_name"
                                                                                required="required"
                                                                                readonly="true"
-                                                                               placeholder="ื่อเซลล์">
+                                                                               placeholder="ชื่อเซลล์">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
@@ -607,6 +607,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                     event.preventDefault();
                     $('#save').attr('disabled', 'disabled');
                     let formData = $(this).serialize();
+                    //alert(formData);
                     $.ajax({
                         url: 'model/manage_customer_event_checkin_process.php',
                         method: "POST",
