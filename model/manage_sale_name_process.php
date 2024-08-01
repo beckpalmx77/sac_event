@@ -27,7 +27,7 @@ if ($_POST["action"] === 'GET_DATA') {
         $return_arr[] = array("id" => $result['id'],
             "sale_name_id" => $result['sale_name_id'],
             "sale_name_desc" => $result['sale_name_desc'],
-            "sale_line_token" => $result['sale_line_token'],
+            "sale_line_user_id" => $result['sale_line_user_id'],
             "status" => $result['status']);
     }
 
@@ -55,7 +55,7 @@ if ($_POST["action"] === 'ADD') {
 
         $sale_name_id = "SLE_" . sprintf('%05s', LAST_ID($conn, "evs_sale_name", 'id'));
         $sale_name_desc = $_POST["sale_name_desc"];
-        $sale_line_token = $_POST["sale_line_token"];
+        $sale_line_user_id = $_POST["sale_line_user_id"];
         //$status = $_POST["status"];
         $sql_find = "SELECT * FROM evs_sale_name WHERE sale_name_id = '" . $sale_name_id . "'";
 
@@ -63,8 +63,8 @@ if ($_POST["action"] === 'ADD') {
         if ($nRows > 0) {
             echo $dup;
         } else {
-            $sql = "INSERT INTO evs_sale_name(sale_name_id,sale_name_desc,sale_line_token) 
-                    VALUES (:sale_name_id,:sale_name_desc,:sale_line_token)";
+            $sql = "INSERT INTO evs_sale_name(sale_name_id,sale_name_desc,sale_line_user_id) 
+                    VALUES (:sale_name_id,:sale_name_desc,:sale_line_user_id)";
 
 /*
             $txt = $sql . " | " . $sale_name_desc;
@@ -76,7 +76,7 @@ if ($_POST["action"] === 'ADD') {
             $query = $conn->prepare($sql);
             $query->bindParam(':sale_name_id', $sale_name_id, PDO::PARAM_STR);
             $query->bindParam(':sale_name_desc', $sale_name_desc, PDO::PARAM_STR);
-            $query->bindParam(':sale_line_token', $sale_line_token, PDO::PARAM_STR);
+            $query->bindParam(':sale_line_user_id', $sale_line_user_id, PDO::PARAM_STR);
             $query->execute();
             $lastInsertId = $conn->lastInsertId();
 
@@ -96,17 +96,17 @@ if ($_POST["action"] === 'UPDATE') {
         $id = $_POST["id"];
         $sale_name_id = $_POST["sale_name_id"];
         $sale_name_desc = $_POST["sale_name_desc"];
-        $sale_line_token = $_POST["sale_line_token"];
+        $sale_line_user_id = $_POST["sale_line_user_id"];
         //$status = $_POST["status"];
         $sql_find = "SELECT * FROM evs_sale_name WHERE id = '" . $id . "'";
         $nRows = $conn->query($sql_find)->fetchColumn();
         if ($nRows > 0) {
-            $sql_update = "UPDATE evs_sale_name SET sale_name_id=:sale_name_id,sale_name_desc=:sale_name_desc,sale_line_token=:sale_line_token            
+            $sql_update = "UPDATE evs_sale_name SET sale_name_id=:sale_name_id,sale_name_desc=:sale_name_desc,sale_line_user_id=:sale_line_user_id            
             WHERE id = :id";
             $query = $conn->prepare($sql_update);
             $query->bindParam(':sale_name_id', $sale_name_id, PDO::PARAM_STR);
             $query->bindParam(':sale_name_desc', $sale_name_desc, PDO::PARAM_STR);
-            $query->bindParam(':sale_line_token', $sale_line_token, PDO::PARAM_STR);
+            $query->bindParam(':sale_line_user_id', $sale_line_user_id, PDO::PARAM_STR);
             $query->bindParam(':id', $id, PDO::PARAM_STR);
             $query->execute();
             echo $save_success;
@@ -206,7 +206,7 @@ if ($_POST["action"] === 'GET_SALE_NAME') {
                 "id" => $row['id'],
                 "sale_name_id" => $row['sale_name_id'],
                 "sale_name_desc" => $row['sale_name_desc'],
-                "sale_line_token" => $row['sale_line_token'],
+                "sale_line_user_id" => $row['sale_line_user_id'],
                 "update" => "<button type='button' name='update' id='" . $row['id'] . "' class='btn btn-info btn-xs update' data-toggle='tooltip' title='Update'>Update</button>",
                 "delete" => "<button type='button' name='delete' id='" . $row['id'] . "' class='btn btn-danger btn-xs delete' data-toggle='tooltip' title='Delete'>Delete</button>",
                 "status" => $row['status'] === 'Y' ? "<div class='text-success'>" . $row['status'] . "</div>" : "<div class='text-muted'> " . $row['status'] . "</div>"

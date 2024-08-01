@@ -55,7 +55,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['sale_name_id']) == ""
                                                 <tr>
                                                     <th>รหัส Sale</th>
                                                     <th>ชื่อ Sale</th>
-                                                    <th>Sale Line Token</th>
+                                                    <th>Sale Line USER ID</th>
                                                     <th>Action</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -64,7 +64,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['sale_name_id']) == ""
                                                 <tr>
                                                     <th>รหัส Sale</th>
                                                     <th>ชื่อ Sale</th>
-                                                    <th>Sale Line Token</th>
+                                                    <th>Sale Line USER ID</th>
                                                     <th>Action</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -106,11 +106,11 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['sale_name_id']) == ""
                                                                 </div>
 
                                                                 <div class="form-group">
-                                                                    <label for="sale_line_token"
-                                                                           class="control-label">Sale Line Token</label>
+                                                                    <label for="sale_line_user_id"
+                                                                           class="control-label">Sale Line USER ID</label>
                                                                     <input type="text" class="form-control"
-                                                                           id="sale_line_token"
-                                                                           name="sale_line_token"
+                                                                           id="sale_line_user_id"
+                                                                           name="sale_line_user_id"
                                                                            placeholder="">
                                                                 </div>
 
@@ -263,7 +263,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['sale_name_id']) == ""
                 'columns': [
                     {data: 'sale_name_id'},
                     {data: 'sale_name_desc'},
-                    {data: 'sale_line_token'},
+                    {data: 'sale_line_user_id'},
                     {data: 'update'},
                     {data: 'delete'}
                 ]
@@ -303,7 +303,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['sale_name_id']) == ""
                 $('#id').val("");
                 $('#sale_name_id').val("");
                 $('#sale_name_desc').val("");
-                $('#sale_line_token').val("");
+                $('#sale_line_user_id').val("");
                 $('.modal-title').html("<i class='fa fa-plus'></i> ADD Record");
                 $('#action').val('ADD');
                 $('#save').val('Save');
@@ -328,13 +328,13 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['sale_name_id']) == ""
                         let id = response[i].id;
                         let sale_name_id = response[i].sale_name_id;
                         let sale_name_desc = response[i].sale_name_desc;
-                        let sale_line_token = response[i].sale_line_token;
+                        let sale_line_user_id = response[i].sale_line_user_id;
 
                         $('#recordModal').modal('show');
                         $('#id').val(id);
                         $('#sale_name_id').val(sale_name_id);
                         $('#sale_name_desc').val(sale_name_desc);
-                        $('#sale_line_token').val(sale_line_token);
+                        $('#sale_line_user_id').val(sale_line_user_id);
                         $('.modal-title').html("<i class='fa fa-plus'></i> Edit Record");
                         $('#action').val('UPDATE');
                         $('#save').val('Save');

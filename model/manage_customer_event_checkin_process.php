@@ -144,7 +144,7 @@ if ($_POST["action"] === 'CONFIRM') {
                 $query->execute();
 
                 $sql_sale_line = $sale_contact_name;
-                $sql_sale_line = "SELECT esn.sale_line_token AS data FROM evs_sale_name esn WHERE esn.sale_name_desc = '" . $sale_contact_name . "'";
+                $sql_sale_line = "SELECT esn.sale_line_user_id AS data FROM evs_sale_name esn WHERE esn.sale_name_desc = '" . $sale_contact_name . "'";
                 $line_user_id = GET_VALUE($conn, $sql_sale_line);
                 $msg = $ar_name . " : " . $cust_name_1 . " : " . $phone . " Check In " . $check_in_date;
 

@@ -48,8 +48,8 @@ if (json_last_error() === JSON_ERROR_NONE) {
 
                 $messageText = $event['message']['text'];
 
-                $sql_find = "SELECT * FROM evs_sale_name WHERE sale_line_token = '" . $event['source']['userId'] . "'";
-                $sale_line_token = $event['source']['userId'];
+                $sql_find = "SELECT * FROM evs_sale_name WHERE sale_line_user_id = '" . $event['source']['userId'] . "'";
+                $sale_line_user_id = $event['source']['userId'];
                 $nRows = $conn->query($sql_find)->fetchColumn();
                 if ($nRows > 0) {
                     echo $dup;
@@ -57,10 +57,10 @@ if (json_last_error() === JSON_ERROR_NONE) {
 
                 } else {
 
-                    $sql = "INSERT INTO evs_sale_name (sale_line_token,messageText) 
-                            VALUES (:sale_line_token,messageText)";
+                    $sql = "INSERT INTO evs_sale_name (sale_line_user_id,messageText) 
+                            VALUES (:sale_line_user_id,messageText)";
                     $query = $conn->prepare($sql);
-                    $query->bindParam(':sale_line_token', $sale_line_token, PDO::PARAM_STR);
+                    $query->bindParam(':sale_line_user_id', $sale_line_user_id, PDO::PARAM_STR);
                     $query->bindParam(':messageText', $messageText, PDO::PARAM_STR);
                     $query->execute();
                     $lastInsertId = $conn->lastInsertId();
