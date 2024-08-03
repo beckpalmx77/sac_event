@@ -85,7 +85,7 @@
         const winnerDiv = document.getElementById('winner');
         let lastRandomID = '';
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 25; i++) {
             lastRandomID = await fetchRandomID();
             const result1 = Math.random().toString(36).substring(2, 7);
             const result2 = Math.random().toString(36).substring(2, 7);
