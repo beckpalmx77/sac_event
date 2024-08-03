@@ -34,7 +34,7 @@
 <body class="flex items-center justify-center min-h-screen bg-gray-100 relative">
 
 <div id="tsparticles"></div>
-
+<audio id="fireworks-sound" src="sound/fireworks.mp3" loop></audio>
 <div class="container mx-auto px-4">
     <div class="card mb-8">
         <div class="text-center">
@@ -120,9 +120,15 @@
 
         tsParticles.load("tsparticles", {
             preset: "fireworks",
-        }).then(container => {
-            container.particles.domItem.removeAttribute('data-tsParticles-id');
         });
+    }
+
+    function showFireworks() {
+        const fireworksSound = document.getElementById('fireworks-sound');
+        tsParticles.load("tsparticles", {
+            preset: "fireworks",
+        });
+        fireworksSound.play();
     }
 
     function toggleButtons() {
@@ -133,6 +139,9 @@
     }
 
     function clearScreen() {
+        const fireworksSound = document.getElementById('fireworks-sound');
+        fireworksSound.pause();
+        fireworksSound.currentTime = 0;
         window.location.reload();
     }
 
