@@ -115,7 +115,7 @@
     }
 
     function showFireworks() {
-        const audio = new Audio('fireworks.mp3');
+        const audio = new Audio('sound/fireworks.mp3');
         audio.play();
 
         tsParticles.load("tsparticles", {
