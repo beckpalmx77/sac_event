@@ -33,7 +33,7 @@
 
 <div id="tsparticles"></div>
 
-<audio id="fireworks-sound" src="fireworks.mp3" loop></audio>
+<audio id="fireworks-sound" src="sound/fireworks.mp3" loop></audio>
 
 <div class="container mx-auto px-4">
     <div class="card mb-8">
