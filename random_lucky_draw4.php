@@ -118,14 +118,10 @@
         const audio = new Audio('sound/fireworks.mp3');
         audio.play();
 
-        const fireworks = tsParticles.load("tsparticles", {
+        tsParticles.load("tsparticles", {
             preset: "fireworks",
-        });
-
-        audio.addEventListener('ended', () => {
-            fireworks.then(container => {
-                container.destroy();
-            });
+        }).then(container => {
+            container.particles.domItem.removeAttribute('data-tsParticles-id');
         });
     }
 
