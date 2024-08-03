@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,12 +30,11 @@
         }
     </style>
 </head>
+
 <body class="flex items-center justify-center min-h-screen bg-gray-100 relative">
 
 <div id="tsparticles"></div>
-
 <audio id="fireworks-sound" src="sound/fireworks.mp3" loop></audio>
-
 <div class="container mx-auto px-4">
     <div class="card mb-8">
         <div class="text-center">
@@ -61,10 +61,10 @@
 </div>
 
 <script>
-    async function fetchRandomName() {
+    async function fetchRandomID() {
         const response = await fetch('fetch_random_name.php');
         const data = await response.json();
-        return data.a;
+        return data.id;
     }
 
     async function fetchWinnerInfo(name) {
@@ -83,33 +83,43 @@
         const randomNamesDiv = document.getElementById('random-names');
         const luckyDiv = document.getElementById('lucky');
         const winnerDiv = document.getElementById('winner');
-        let lastRandomName = '';
+        let lastRandomID = '';
 
-        for (let i = 0; i <= 30; i++) {
-            lastRandomName = await fetchRandomName();
+        for (let i = 0; i < 10; i++) {
+            lastRandomID = await fetchRandomID();
             const result1 = Math.random().toString(36).substring(2, 7);
             const result2 = Math.random().toString(36).substring(2, 7);
-            randomNamesDiv.innerHTML = result1 + lastRandomName + result2;
+            randomNamesDiv.innerHTML = result1 + lastRandomID + result2;
             await new Promise(resolve => setTimeout(resolve, 100));
         }
 
-        const winnerInfo = await fetchWinnerInfo(lastRandomName);
+        const winnerInfo = await fetchWinnerInfo(lastRandomID);
+        randomNamesDiv.innerHTML = "";
         luckyDiv.innerHTML = '**** ผู้โชคดีคือ ****\n';
         winnerDiv.innerHTML = `${winnerInfo.ar_name} (${winnerInfo.province_name})`;
 
-        markWinner(lastRandomName);
+        markWinner(lastRandomID);
 
         showFireworks();
         toggleButtons();
     }
 
-    async function markWinner(name) {
+    async function markWinner(id) {
         await fetch('mark_winner.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({name}),
+            body: JSON.stringify({id}),
+        });
+    }
+
+    function showFireworks() {
+        const audio = new Audio('fireworks.mp3');
+        audio.play();
+
+        tsParticles.load("tsparticles", {
+            preset: "fireworks",
         });
     }
 
@@ -137,6 +147,8 @@
 
     document.getElementById('start-button').addEventListener('click', displayRandomNames);
     document.getElementById('clear-button').addEventListener('click', clearScreen);
+
 </script>
 </body>
+
 </html>
