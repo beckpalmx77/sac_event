@@ -1,27 +1,10 @@
 <?php
-$host = '192.168.88.7';
-$db = 'sac_event';
-$user = 'myadmin';
-$pass = 'myadmin';
-$port = '3307';
-
-$dsn = "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4";
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
-
-try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
-}
+include 'config/connect_db.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 $name = $data['name'];
 
-$stmt = $pdo->prepare("SELECT * FROM v_event_checkin WHERE id = ?");
+$stmt = $conn->prepare("SELECT * FROM v_event_checkin WHERE id = ?");
 $stmt->execute([$name]);
 $participant = $stmt->fetch();
 
