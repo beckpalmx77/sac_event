@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Winner</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-preset-fireworks@2/tsparticles.preset.fireworks.bundle.min.js"></script>
     <style>
         .btn-custom {
             @apply bg-blue-500 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out;
@@ -18,15 +18,26 @@
         .card {
             @apply bg-white text-blue-900 p-6 shadow-lg rounded-lg;
         }
+
+        #tsparticles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-white">
+<body class="flex items-center justify-center min-h-screen bg-white relative">
+<div id="tsparticles"></div>
 <div class="container mx-auto px-4">
     <div class="card">
         <div class="text-center">
             <h1 class="text-2xl font-bold mb-4">สุ่มรายชื่อผู้โชคดี</h1>
             <div id="random-names" class="text-black-500 font-bold text-3xl"></div>
-            <div id="winner" class="text-green-500 font-bold text-5xl"></div>
+            <div id="lucky" class="text-red-500 font-bold text-4xl"></div>
+            <div id="winner" class="text-green-500 font-bold text-6xl"></div>
         </div>
     </div>
 
@@ -35,8 +46,13 @@
 
     <div class="card">
         <div class="text-center">
-            <button id="start-button" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+            <button id="start-button"
+                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
                 <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">เริ่มการสุ่ม</span>
+            </button>
+            <button id="clear-button"
+                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 hidden">
+                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">สุ่มรางวัลต่อไป</span>
             </button>
         </div>
     </div>
@@ -55,7 +71,7 @@
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name }),
+            body: JSON.stringify({name}),
         });
         const data = await response.json();
         return data;
@@ -63,23 +79,26 @@
 
     async function displayRandomNames() {
         const randomNamesDiv = document.getElementById('random-names');
+        const luckyDiv = document.getElementById('lucky');
         const winnerDiv = document.getElementById('winner');
         let lastRandomName = '';
 
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 30; i++) {
             lastRandomName = await fetchRandomName();
-            const result1 = Math.random().toString(36).substring(2,7);
-            const result2= Math.random().toString(36).substring(2,7);
+            const result1 = Math.random().toString(36).substring(2, 7);
+            const result2 = Math.random().toString(36).substring(2, 7);
             randomNamesDiv.innerHTML = result1 + lastRandomName + result2;
             await new Promise(resolve => setTimeout(resolve, 1));
         }
-        randomNamesDiv.innerHTML = "ผู้โชคดีคือ";
+
         const winnerInfo = await fetchWinnerInfo(lastRandomName);
+        luckyDiv.innerHTML = '**** ผู้โชคดีคือ ****\n';
         winnerDiv.innerHTML = `${winnerInfo.ar_name} (${winnerInfo.province_name})`;
 
         markWinner(lastRandomName);
 
         showFireworks();
+        toggleButtons();
     }
 
     async function markWinner(name) {
@@ -88,19 +107,32 @@
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name }),
+            body: JSON.stringify({name}),
         });
     }
 
     function showFireworks() {
-        confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: { y: 0.6 }
+        tsParticles.load("tsparticles", {
+            preset: "fireworks",
         });
     }
 
+    function toggleButtons() {
+        const startButton = document.getElementById('start-button');
+        const clearButton = document.getElementById('clear-button');
+        startButton.classList.toggle('hidden');
+        clearButton.classList.toggle('hidden');
+    }
+
+    function clearScreen() {
+        window.location.reload();
+        //document.getElementById('random-names').innerHTML = '';
+        //document.getElementById('winner').innerHTML = '';
+        //toggleButtons();
+    }
+
     document.getElementById('start-button').addEventListener('click', displayRandomNames);
+    document.getElementById('clear-button').addEventListener('click', clearScreen);
 </script>
 </body>
 </html>
