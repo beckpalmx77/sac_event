@@ -29,30 +29,36 @@
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100 relative">
+<body class="flex items-center justify-center min-h-screen bg-white relative">
 
 <div id="tsparticles"></div>
 
+
 <div class="container mx-auto px-4">
-    <div class="card mb-8">
+    <div class="card">
         <div class="text-center">
-            <img src="img/logo/logo text-01.png" width="400" height="158" alt="Logo" class="mx-auto mb-8">
+            <div class="flex items-center justify-center min-h-screen">
+                <img src="img/logo/logo text-01.png" width="400" height="158" alt="Logo">
+            </div>
             <h1 class="text-2xl font-bold mb-4">สุ่มรายชื่อผู้โชคดี</h1>
-            <div id="random-names" class="text-black-500 font-bold text-3xl mb-4"></div>
-            <div id="lucky" class="text-red-500 font-bold text-4xl mb-4"></div>
-            <div id="winner" class="text-green-500 font-bold text-6xl mb-4"></div>
+            <div id="random-names" class="text-black-500 font-bold text-3xl"></div>
+            <div id="lucky" class="text-red-500 font-bold text-4xl"></div>
+            <div id="winner" class="text-green-500 font-bold text-6xl"></div>
         </div>
     </div>
+
+    <br>
+    <br>
 
     <div class="card">
         <div class="text-center">
             <button id="start-button"
-                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300">
-                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">เริ่มการสุ่ม</span>
+                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">เริ่มการสุ่ม</span>
             </button>
             <button id="clear-button"
-                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 hidden">
-                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">สุ่มรางวัลต่อไป</span>
+                    class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 hidden">
+                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">สุ่มรางวัลต่อไป</span>
             </button>
         </div>
     </div>
@@ -88,7 +94,7 @@
             const result1 = Math.random().toString(36).substring(2, 7);
             const result2 = Math.random().toString(36).substring(2, 7);
             randomNamesDiv.innerHTML = result1 + lastRandomName + result2;
-            await new Promise(resolve => setTimeout(resolve, 100));
+            await new Promise(resolve => setTimeout(resolve, 1));
         }
 
         const winnerInfo = await fetchWinnerInfo(lastRandomName);
@@ -126,6 +132,9 @@
 
     function clearScreen() {
         window.location.reload();
+        //document.getElementById('random-names').innerHTML = '';
+        //document.getElementById('winner').innerHTML = '';
+        //toggleButtons();
     }
 
     document.getElementById('start-button').addEventListener('click', displayRandomNames);
