@@ -18,7 +18,7 @@ try {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
 
-$stmt = $pdo->query("SELECT id as a FROM v_event_checkin WHERE is_winner = 'N' ORDER BY RAND() LIMIT 1");
+$stmt = $pdo->query("SELECT id FROM v_event_checkin WHERE is_winner = 'N' ORDER BY RAND() LIMIT 1");
 $participant = $stmt->fetch();
 
 echo json_encode($participant);

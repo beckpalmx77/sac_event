@@ -20,13 +20,15 @@ try {
 }
 
 $data = json_decode(file_get_contents('php://input'), true);
-$name = $data['a'];
+$id = $data['id'];
 
+$sql_update = "UPDATE evs_event_checkin SET is_winner = 'Y' WHERE id = ?";
 $myfile = fopen("permission-param.txt", "w") or die("Unable to open file!");
-fwrite($myfile, $name);
+fwrite($myfile, $sql_update);
 fclose($myfile);
 
-$stmt = $pdo->prepare("UPDATE evs_event_checkin SET is_winner = 'Y' WHERE name = ?");
-$stmt->execute([$name]);
+$stmt = $pdo->prepare($sql_update);
+$stmt->execute([$id]);
+
 
 ?>
