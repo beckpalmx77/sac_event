@@ -69,7 +69,7 @@
             <img src="img/logo/logo text-01.png" width="400" height="158" alt="Logo" class="mx-auto mb-8">
             <div id="header-random-names" class="text-black-500 font-bold text-3xl mb-4"><h1>10 ปี สงวนออโต้คาร์ Lucky Draw</h1></div>
             <div id="random-names" class="text-black-500 font-bold text-3xl mb-4"></div>
-            <div id="countdown" class="text-red-500 font-bold text-4xl mb-4"></div>
+            <div id="countdown" class="text-red-500 font-bold text-8xl mb-4"></div>
             <div id="lucky" class="text-red-500 font-bold text-4xl mb-4"></div>
             <div id="winner" class="text-green-500 font-bold text-6xl mb-4"></div>
         </div>
@@ -179,7 +179,7 @@
             span.style.animationDuration = Math.random() * 1 + 1.5 + 's'; // ลดระยะเวลาแอนิเมชันให้เร็วขึ้น
             span.innerHTML = Math.random().toString(36).substring(2, 15);
             matrix.appendChild(span);
-        }, 30); // เพิ่มตัวอักษรใหม่ทุก 50 มิลลิวินาที
+        }, 30); // เพิ่มตัวอักษรใหม่ทุก 30 มิลลิวินาที
 
         // เก็บ intervalId ไว้เพื่อใช้ในฟังก์ชัน stopMatrixEffect
         matrix.dataset.intervalId = intervalId;
