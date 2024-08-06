@@ -151,6 +151,7 @@
             new Audio('sound/countdown2.mp3'),
             new Audio('sound/countdown1.mp3'),
             new Audio('sound/countdown0.mp3'),
+            new Audio('sound/countdown_go.mp3')
         ];
 
         for (let i = 5; i >= 0; i--) {
