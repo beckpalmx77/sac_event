@@ -147,7 +147,7 @@
         // Start Matrix effect
         startMatrixEffect();
 
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 30; i++) {
             lastRandomID = await fetchRandomID();
             const result1 = Math.random().toString(36).substring(2, 7);
             const result2 = Math.random().toString(36).substring(2, 7);
