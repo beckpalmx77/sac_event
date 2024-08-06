@@ -149,10 +149,11 @@
             new Audio('sound/countdown4.mp3'),
             new Audio('sound/countdown3.mp3'),
             new Audio('sound/countdown2.mp3'),
-            new Audio('sound/countdown1.mp3')
+            new Audio('sound/countdown1.mp3'),
+            new Audio('sound/countdown0.mp3'),
         ];
 
-        for (let i = 5; i > 1; i--) {
+        for (let i = 5; i >= 0; i--) {
             countdownDiv.innerHTML = i;
             sounds[5 - i].play();
             await new Promise(resolve => setTimeout(resolve, 1000));
