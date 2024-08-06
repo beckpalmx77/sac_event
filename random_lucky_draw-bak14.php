@@ -55,33 +55,6 @@
                 transform: translateY(100vh);
             }
         }
-
-        #countdown {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            font-size: 10rem; /* Adjust as needed */
-            color: red;
-            font-weight: bold;
-        }
-
-        .bottom-buttons {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            padding: 1rem;
-        }
-
-        .bottom-buttons button {
-            flex: 1;
-            max-width: calc(50% - 1rem); /* ensures both buttons together take full width with a gap */
-        }
     </style>
 </head>
 
@@ -89,30 +62,30 @@
 
 <div id="tsparticles"></div>
 <div class="matrix" id="matrix"></div>
-<div id="countdown"></div>
 
 <div class="container mx-auto px-4 flex-grow">
     <div class="card mb-8">
         <div class="text-center">
             <img src="img/logo/logo text-01.png" class="mx-auto mb-8 max-w-full" alt="Logo">
-            <div id="header-random-names" class="text-blue-900 font-bold text-xl md:text-6xl mb-4">
-                10 ปี สงวนออโต้คาร์ Lucky Draw
+            <div id="header-random-names" class="text-black-500 font-bold text-xl md:text-3xl mb-4">
+                <h1>10 ปี สงวนออโต้คาร์ Lucky Draw</h1>
             </div>
             <div id="random-names" class="text-black-500 font-bold text-xl md:text-3xl mb-4"></div>
+            <div id="countdown" class="text-red-500 font-bold text-8xl md:text-12xl lg:text-20xl mb-4"></div>
             <div id="lucky" class="text-red-500 font-bold text-2xl md:text-4xl mb-4"></div>
             <div id="winner" class="text-green-500 font-bold text-4xl md:text-6xl mb-4"></div>
         </div>
     </div>
 </div>
 
-<div class="bottom-buttons">
+<div class="w-full flex justify-center mb-4 px-4">
     <button id="start-button"
-            class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300">
-        <span class="relative w-full py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">เริ่มการสุ่ม</span>
+            class="relative inline-flex items-center justify-center p-0.5 mb-2 mx-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300">
+        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">เริ่มการสุ่ม</span>
     </button>
     <button id="clear-button"
-            class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 hidden">
-        <span class="relative w-full py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">สุ่มรางวัลต่อไป</span>
+            class="relative inline-flex items-center justify-center p-0.5 mb-2 mx-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 hidden">
+        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">สุ่มรางวัลต่อไป</span>
     </button>
 </div>
 

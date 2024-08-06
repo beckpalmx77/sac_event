@@ -66,22 +66,6 @@
             color: red;
             font-weight: bold;
         }
-
-        .bottom-buttons {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            padding: 1rem;
-        }
-
-        .bottom-buttons button {
-            flex: 1;
-            max-width: calc(50% - 1rem); /* ensures both buttons together take full width with a gap */
-        }
     </style>
 </head>
 
@@ -105,14 +89,14 @@
     </div>
 </div>
 
-<div class="bottom-buttons">
+<div class="w-full flex justify-center mb-4 px-4">
     <button id="start-button"
-            class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300">
-        <span class="relative w-full py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">เริ่มการสุ่ม</span>
+            class="relative inline-flex items-center justify-center p-0.5 mb-2 mx-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300">
+        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">เริ่มการสุ่ม</span>
     </button>
     <button id="clear-button"
-            class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 hidden">
-        <span class="relative w-full py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">สุ่มรางวัลต่อไป</span>
+            class="relative inline-flex items-center justify-center p-0.5 mb-2 mx-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 hidden">
+        <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">สุ่มรางวัลต่อไป</span>
     </button>
 </div>
 
