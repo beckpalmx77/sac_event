@@ -90,6 +90,8 @@
 </div>
 
 <script>
+    let matrixAudio;
+
     async function fetchRandomID() {
         const response = await fetch('fetch_random_name.php');
         const data = await response.json();
@@ -126,6 +128,9 @@
             await new Promise(resolve => setTimeout(resolve, 100));
         }
 
+        // Stop Matrix effect and sound
+        stopMatrixEffect();
+
         // Countdown before showing the winner
         await countdown();
 
@@ -136,33 +141,23 @@
 
         markWinner(lastRandomID);
 
-        // Stop Matrix effect and show fireworks
-        stopMatrixEffect();
+        // Show fireworks
         showFireworks();
         toggleButtons();
     }
 
     async function countdown() {
-        let cnt = "";
         const countdownDiv = document.getElementById('countdown');
         const sounds = [
             new Audio('sound/countdown5.mp3'),
             new Audio('sound/countdown4.mp3'),
             new Audio('sound/countdown3.mp3'),
             new Audio('sound/countdown2.mp3'),
-            new Audio('sound/countdown1.mp3'),
-            new Audio('sound/countdown0.mp3'),
-            new Audio('sound/countdown_go.mp3')
+            new Audio('sound/countdown1.mp3')
         ];
 
-        for (let i = 5; i >= -1; i--) {
-            if (i<0) {
-                cnt = "GO ...";
-            } else
-            {
-                cnt = i;
-            }
-            countdownDiv.innerHTML = cnt;
+        for (let i = 5; i > 0; i--) {
+            countdownDiv.innerHTML = i;
             sounds[5 - i].play();
             await new Promise(resolve => setTimeout(resolve, 1000));
         }
@@ -185,20 +180,30 @@
         let intervalId = setInterval(() => {
             const span = document.createElement('span');
             span.style.left = Math.random() * 100 + 'vw';
-            span.style.animationDuration = Math.random() * 1 + 1.5 + 's'; // ลดระยะเวลาแอนิเมชันให้เร็วขึ้น
+            span.style.animationDuration = Math.random() * 1 + 1.5 + 's';
             span.innerHTML = Math.random().toString(36).substring(2, 15);
             matrix.appendChild(span);
-        }, 30); // เพิ่มตัวอักษรใหม่ทุก 30 มิลลิวินาที
+        }, 30);
 
-        // เก็บ intervalId ไว้เพื่อใช้ในฟังก์ชัน stopMatrixEffect
         matrix.dataset.intervalId = intervalId;
+
+        // Play matrix sound
+        matrixAudio = new Audio('sound/matrix.mp3');
+        matrixAudio.loop = true;
+        matrixAudio.play();
     }
 
     function stopMatrixEffect() {
         const matrix = document.getElementById('matrix');
-        clearInterval(matrix.dataset.intervalId); // หยุด interval
+        clearInterval(matrix.dataset.intervalId);
         matrix.innerHTML = '';
         matrix.style.display = 'none';
+
+        // Stop matrix sound
+        if (matrixAudio) {
+            matrixAudio.pause();
+            matrixAudio.currentTime = 0;
+        }
     }
 
     function showFireworks() {
