@@ -30,38 +30,12 @@
             height: 100%;
             z-index: -1;
         }
-
-        .matrix {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: black;
-            overflow: hidden;
-            z-index: -2;
-            display: none;
-        }
-
-        .matrix span {
-            position: absolute;
-            top: -100px;
-            color: #00ff00;
-            font-family: monospace;
-            font-size: 20px;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
     </style>
 </head>
 
 <body class="flex items-center justify-center min-h-screen bg-gray-100 relative">
 
 <div id="tsparticles"></div>
-<div class="matrix" id="matrix"></div>
 
 <div class="container mx-auto px-4">
     <div class="card mb-8">
@@ -69,7 +43,6 @@
             <img src="img/logo/logo text-01.png" width="400" height="158" alt="Logo" class="mx-auto mb-8">
             <div id="header-random-names" class="text-black-500 font-bold text-3xl mb-4"><h1>10 ปี สงวนออโต้คาร์ Lucky Draw</h1></div>
             <div id="random-names" class="text-black-500 font-bold text-3xl mb-4"></div>
-            <div id="countdown" class="text-red-500 font-bold text-8xl mb-4"></div>
             <div id="lucky" class="text-red-500 font-bold text-4xl mb-4"></div>
             <div id="winner" class="text-green-500 font-bold text-6xl mb-4"></div>
         </div>
@@ -112,22 +85,15 @@
         const randomNamesDiv = document.getElementById('random-names');
         const luckyDiv = document.getElementById('lucky');
         const winnerDiv = document.getElementById('winner');
-        const countdownDiv = document.getElementById('countdown');
         let lastRandomID = '';
-
-        // Start Matrix effect
-        startMatrixEffect();
 
         for (let i = 0; i < 25; i++) {
             lastRandomID = await fetchRandomID();
-            const result1 = Math.random().toString(30).substring(2, 7);
-            const result2 = Math.random().toString(20).substring(2, 7);
+            const result1 = Math.random().toString(36).substring(2, 7);
+            const result2 = Math.random().toString(36).substring(2, 7);
             randomNamesDiv.innerHTML = result1 + lastRandomID + result2;
             await new Promise(resolve => setTimeout(resolve, 100));
         }
-
-        // Countdown before showing the winner
-        await countdown();
 
         const winnerInfo = await fetchWinnerInfo(lastRandomID);
         randomNamesDiv.innerHTML = "";
@@ -136,19 +102,8 @@
 
         markWinner(lastRandomID);
 
-        // Stop Matrix effect and show fireworks
-        stopMatrixEffect();
         showFireworks();
         toggleButtons();
-    }
-
-    async function countdown() {
-        const countdownDiv = document.getElementById('countdown');
-        for (let i = 5; i >= 0; i--) {
-            countdownDiv.innerHTML = i;
-            await new Promise(resolve => setTimeout(resolve, 1000));
-        }
-        countdownDiv.innerHTML = '';
     }
 
     async function markWinner(id) {
@@ -159,28 +114,6 @@
             },
             body: JSON.stringify({id}),
         });
-    }
-
-    function startMatrixEffect() {
-        const matrix = document.getElementById('matrix');
-        matrix.style.display = 'block';
-        let intervalId = setInterval(() => {
-            const span = document.createElement('span');
-            span.style.left = Math.random() * 100 + 'vw';
-            span.style.animationDuration = Math.random() * 1 + 1.5 + 's'; // ลดระยะเวลาแอนิเมชันให้เร็วขึ้น
-            span.innerHTML = Math.random().toString(36).substring(2, 15);
-            matrix.appendChild(span);
-        }, 50); // เพิ่มตัวอักษรใหม่ทุก 50 มิลลิวินาที
-
-        // เก็บ intervalId ไว้เพื่อใช้ในฟังก์ชัน stopMatrixEffect
-        matrix.dataset.intervalId = intervalId;
-    }
-
-    function stopMatrixEffect() {
-        const matrix = document.getElementById('matrix');
-        clearInterval(matrix.dataset.intervalId); // หยุด interval
-        matrix.innerHTML = '';
-        matrix.style.display = 'none';
     }
 
     function showFireworks() {
