@@ -128,11 +128,12 @@
             await new Promise(resolve => setTimeout(resolve, 100));
         }
 
-        // Stop Matrix effect and sound
-        stopMatrixEffect();
 
         // Countdown before showing the winner
         await countdown();
+
+        // Stop Matrix effect and sound
+        stopMatrixEffect();
 
         const winnerInfo = await fetchWinnerInfo(lastRandomID);
         randomNamesDiv.innerHTML = "";
