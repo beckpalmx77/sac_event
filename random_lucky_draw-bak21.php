@@ -151,8 +151,7 @@
             lastRandomID = await fetchRandomID();
             const result1 = Math.random().toString(36).substring(2, 7);
             const result2 = Math.random().toString(36).substring(2, 7);
-            //randomNamesDiv.innerHTML = result1 + lastRandomID + result2;
-            randomNamesDiv.innerHTML = "";
+            randomNamesDiv.innerHTML = result1 + lastRandomID + result2;
             await new Promise(resolve => setTimeout(resolve, 100));
         }
 
@@ -177,7 +176,6 @@
     async function countdown() {
         let cnt = "";
         const countdownDiv = document.getElementById('countdown');
-        const headerRandomNames = document.getElementById('header-random-names');
         const sounds = [
             new Audio('sound/countdown5.mp3'),
             new Audio('sound/countdown4.mp3'),
@@ -187,8 +185,6 @@
             new Audio('sound/countdown0.mp3'),
             new Audio('sound/countdown_go.mp3')
         ];
-
-        headerRandomNames.style.display = 'none'; // Hide header when countdown starts
 
         for (let i = 5; i >= -1; i--) {
             if (i < 0) {
@@ -201,8 +197,6 @@
             await new Promise(resolve => setTimeout(resolve, 1000));
         }
         countdownDiv.innerHTML = '';
-        // Show header after countdown finishes
-        headerRandomNames.style.display = 'block';
     }
 
     async function markWinner(id) {
