@@ -69,7 +69,7 @@
             <img src="img/logo/logo text-01.png" width="400" height="158" alt="Logo" class="mx-auto mb-8">
             <div id="header-random-names" class="text-black-500 font-bold text-3xl mb-4"><h1>10 ปี สงวนออโต้คาร์ Lucky Draw</h1></div>
             <div id="random-names" class="text-black-500 font-bold text-3xl mb-4"></div>
-            <div id="countdown" class="text-red-500 font-bold text-4xl mb-4"></div>
+            <div id="countdown" class="text-red-500 font-bold text-8xl mb-4"></div>
             <div id="lucky" class="text-red-500 font-bold text-4xl mb-4"></div>
             <div id="winner" class="text-green-500 font-bold text-6xl mb-4"></div>
         </div>
@@ -120,8 +120,8 @@
 
         for (let i = 0; i < 25; i++) {
             lastRandomID = await fetchRandomID();
-            const result1 = Math.random().toString(36).substring(2, 7);
-            const result2 = Math.random().toString(36).substring(2, 7);
+            const result1 = Math.random().toString(30).substring(2, 7);
+            const result2 = Math.random().toString(20).substring(2, 7);
             randomNamesDiv.innerHTML = result1 + lastRandomID + result2;
             await new Promise(resolve => setTimeout(resolve, 100));
         }
@@ -144,17 +144,8 @@
 
     async function countdown() {
         const countdownDiv = document.getElementById('countdown');
-        const sounds = [
-            new Audio('sound/countdown5.mp3'),
-            new Audio('sound/countdown4.mp3'),
-            new Audio('sound/countdown3.mp3'),
-            new Audio('sound/countdown2.mp3'),
-            new Audio('sound/countdown1.mp3')
-        ];
-
-        for (let i = 5; i > 1; i--) {
+        for (let i = 5; i >= 0; i--) {
             countdownDiv.innerHTML = i;
-            sounds[5 - i].play();
             await new Promise(resolve => setTimeout(resolve, 1000));
         }
         countdownDiv.innerHTML = '';
