@@ -143,6 +143,7 @@
     }
 
     async function countdown() {
+        let cnt = "";
         const countdownDiv = document.getElementById('countdown');
         const sounds = [
             new Audio('sound/countdown5.mp3'),
@@ -154,8 +155,14 @@
             new Audio('sound/countdown_go.mp3')
         ];
 
-        for (let i = 5; i >= 0; i--) {
-            countdownDiv.innerHTML = i;
+        for (let i = 5; i >= -1; i--) {
+            if (i<0) {
+                cnt = "GO ...";
+            } else
+            {
+                cnt = i;
+            }
+            countdownDiv.innerHTML = cnt;
             sounds[5 - i].play();
             await new Promise(resolve => setTimeout(resolve, 1000));
         }
