@@ -23,48 +23,41 @@ $total = 0;
             font-family: Arial, sans-serif;
             font-size: 12px;
         }
-
         .slip-container {
             width: 300px;
             margin: auto;
             border: 1px solid #000;
             padding: 10px;
         }
-
         .slip-header, .slip-footer {
             text-align: center;
             border-bottom: 1px solid #000;
             padding-bottom: 10px;
             margin-bottom: 10px;
         }
-
         .slip-footer {
             border-top: 1px solid #000;
             margin-top: 10px;
             padding-top: 10px;
         }
-
         .slip-body {
             margin-bottom: 10px;
         }
-
         .item-row {
             display: flex;
             justify-content: space-between;
         }
-
         .total-row {
             display: flex;
             justify-content: space-between;
             font-weight: bold;
         }
-
         .large-text {
             font-size: 18px; /* ปรับขนาดฟอนต์ตามต้องการ */
         }
     </style>
     <script>
-        window.onload = function () {
+        window.onload = function() {
             window.print();
         };
 
@@ -97,7 +90,7 @@ $total = 0;
         <h3>SAC 10 YEARS ANNIVERSARY</h3>
         <h3>21 กันยายน 2567</h3>
         <h2 id="ar_name" class="large-text"></h2>
-        <h1 id="table_number" class="large-text"></h1>
+        <h2 id="table_number" class="large-text"></h2>
     </div>
     <div class="slip-footer">
         <p>ขอขอบคุณที่เข้าร่วมงานในครั้งนี้</p>
