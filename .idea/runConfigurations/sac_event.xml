@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="sac_event" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" singleton="false" server_name="localhost" start_url="/sac_event">
+    <method v="2" />
+  </configuration>
+</component>

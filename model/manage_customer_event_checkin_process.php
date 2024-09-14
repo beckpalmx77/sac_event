@@ -309,6 +309,7 @@ if ($_POST["action"] === 'GET_CUSTOMER_CHECKIN') {
 
         if ($_POST['sub_action'] === "GET_MASTER") {
 
+/*
             if ($row['check_in_status'] === 'Y' || $_SESSION['approve_level'] === '3') {
                 $update = "<button type='button' disabled name='update' id='" . $row['id'] . "' class='btn btn-info btn-xs update' data-toggle='tooltip' title='Update'>Check In</button>";
             } else {
@@ -320,7 +321,10 @@ if ($_POST["action"] === 'GET_CUSTOMER_CHECKIN') {
             } else {
                 $detail = "<button type='button' name='detail' id='" . $row['id'] . "' class='btn btn-secondary btn-xs detail' data-toggle='tooltip' title='Detail'>Detail</button>";
             }
+*/
 
+            $update = "<button type='button' name='update' id='" . $row['id'] . "' class='btn btn-info btn-xs update' data-toggle='tooltip' title='Update'>Check In</button>";
+            $detail = "<button type='button' name='detail' id='" . $row['id'] . "' class='btn btn-secondary btn-xs detail' data-toggle='tooltip' title='Detail'>Detail</button>";
 
             $data[] = array(
                 "id" => $row['id'],
