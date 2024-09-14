@@ -1,0 +1,11 @@
+update evs_event_checkin set 
+cust_name_1 = '-' ,
+cust_name_2 = '-' ,
+cust_name_3 = '-' ,
+cust_name_4 = '-' ,
+cust_name_5 = '-' ,
+cust_name_6 = '-' ,
+cust_name_7 = '-' ,
+cust_name_8 = '-' ,
+cust_name_9 = '-' ,
+cust_name_10 = '-' 

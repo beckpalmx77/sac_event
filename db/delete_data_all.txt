@@ -1,0 +1,6 @@
+DELETE FROM evs_customer ; 
+TRUNCATE TABLE evs_customer;
+ALTER TABLE evs_customer AUTO_INCREMENT=1; 
+DELETE FROM evs_event_checkin ; 
+TRUNCATE TABLE evs_event_checkin;
+ALTER TABLE evs_event_checkin AUTO_INCREMENT=1; 

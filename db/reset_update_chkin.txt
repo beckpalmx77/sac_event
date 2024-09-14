@@ -1,0 +1,1 @@
+update evs_event_checkin set check_in_status = 'N' , attendance_qty = 0 , order_record = 0;
