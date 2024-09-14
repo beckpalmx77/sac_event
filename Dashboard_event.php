@@ -690,7 +690,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         let cust_name_4 = response[i].cust_name_4;
                         let cust_name_5 = response[i].cust_name_5;
                         let cust_name_6 = response[i].cust_name_6;
-                        let cust_level = response[i].cust_level;
+                        let cust_level = (response[i].cust_level === "V" || response[i].cust_level === "v") ? "VIP" : response[i].cust_level;
                         let group_guest = response[i].group_guest;
                         let phone = response[i].phone;
                         let province_name = response[i].province_name;
@@ -712,7 +712,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         $('#cust_name_5').val(cust_name_5);
                         $('#cust_name_6').val(cust_name_6);
                         $('#cust_level').css('color', 'red');
-                        $("#cust_level").css("fontSize", "20px");
+                        $("#cust_level").css("fontSize", "30px");
                         $('#cust_level').val(cust_level);
                         $('#group_guest').val(group_guest);
                         $('#phone').val(phone);
@@ -770,7 +770,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         let cust_name_4 = response[i].cust_name_4;
                         let cust_name_5 = response[i].cust_name_5;
                         let cust_name_6 = response[i].cust_name_6;
-                        let cust_level = response[i].cust_level;
+                        let cust_level = (response[i].cust_level === "V" || response[i].cust_level === "v") ? "VIP" : response[i].cust_level;
                         let group_guest = response[i].group_guest;
                         let phone = response[i].phone;
                         let province_name = response[i].province_name;
@@ -792,8 +792,8 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         $('#cust_name_5').val(cust_name_5);
                         $('#cust_name_6').val(cust_name_6);
                         $('#cust_level').css('color', 'red');
-                        $("#cust_level").css("fontSize", "20px");
-                        $('#cust_level').val(cust_level);
+                        $("#cust_level").css("fontSize", "30px");
+                        $('#cust_level').val(cust_level.toUpperCase());
                         $('#group_guest').val(group_guest);
                         $('#phone').val(phone);
                         $('#province_name').val(province_name);
