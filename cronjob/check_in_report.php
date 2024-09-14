@@ -74,7 +74,7 @@ if ($attendance_qty > 0) {
             $line_no++;
             $line_user_id = $row['data'];
             echo $line_no . " | " . $row['sale_name_desc'] . " | " . $line_user_id . " | " . $msg;
-            //send_Message($access_token, $line_user_id, $msg);
+            send_Message($access_token, $line_user_id, $msg);
         }
     } else {
         echo "ไม่พบข้อมูลผู้ใช้";
