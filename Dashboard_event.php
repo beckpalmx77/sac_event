@@ -42,6 +42,18 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
         }
     </style>
 
+    <style>
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+
     <div id="wrapper">
         <?php
         // include('includes/Side-Bar.php');
@@ -690,7 +702,8 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         let cust_name_4 = response[i].cust_name_4;
                         let cust_name_5 = response[i].cust_name_5;
                         let cust_name_6 = response[i].cust_name_6;
-                        let cust_level = (response[i].cust_level === "V" || response[i].cust_level === "v") ? "VIP" : response[i].cust_level;
+                        let cust_level = /v/i.test(response[i].cust_level) ? "VIP" : response[i].cust_level;
+
                         let group_guest = response[i].group_guest;
                         let phone = response[i].phone;
                         let province_name = response[i].province_name;
@@ -714,6 +727,13 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         $('#cust_level').css('color', 'red');
                         $("#cust_level").css("fontSize", "30px");
                         $('#cust_level').val(cust_level);
+
+                        if (cust_level === "VIP") {
+                            $('#cust_level').addClass('blink').text(cust_level); // ใส่ชื่อ element ที่ต้องการแสดงผลข้อความ
+                        } else {
+                            $('#cust_level').removeClass('blink').text(cust_level);
+                        }
+
                         $('#group_guest').val(group_guest);
                         $('#phone').val(phone);
                         $('#province_name').val(province_name);
@@ -726,7 +746,6 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                             $('#check_in_status_display').css('color', 'red');
 
                         }
-
                         $('#check_in_status_display').val(check_in_status_display);
                         $('#table_number').css('color', 'blue');
                         $("#table_number").css("fontSize", "30px");
@@ -770,7 +789,7 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         let cust_name_4 = response[i].cust_name_4;
                         let cust_name_5 = response[i].cust_name_5;
                         let cust_name_6 = response[i].cust_name_6;
-                        let cust_level = (response[i].cust_level === "V" || response[i].cust_level === "v") ? "VIP" : response[i].cust_level;
+                        let cust_level = /v/i.test(response[i].cust_level) ? "VIP" : response[i].cust_level;
                         let group_guest = response[i].group_guest;
                         let phone = response[i].phone;
                         let province_name = response[i].province_name;
@@ -806,8 +825,6 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                             $('#check_in_status_display').css('color', 'red');
 
                         }
-
-
                         $('#check_in_status_display').val(check_in_status_display);
                         $('#table_number').css('color', 'blue');
                         $("#table_number").css("fontSize", "30px");

@@ -700,6 +700,11 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         $('#cust_level').css('color', 'red');
                         $("#cust_level").css("fontSize", "20px");
                         $('#cust_level').val(cust_level);
+                        if (cust_level === "VIP") {
+                            $('#cust_level').addClass('blink').text(cust_level); // ใส่ชื่อ element ที่ต้องการแสดงผลข้อความ
+                        } else {
+                            $('#cust_level').removeClass('blink').text(cust_level);
+                        }
                         $('#group_guest').val(group_guest);
                         $('#phone').val(phone);
                         $('#province_name').val(province_name);
@@ -712,8 +717,6 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                             $('#check_in_status_display').css('color', 'red');
 
                         }
-                        ;
-
                         $('#check_in_status_display').val(check_in_status_display);
                         $('#table_number').css('color', 'blue');
                         $("#table_number").css("fontSize", "30px");
@@ -781,6 +784,11 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                         $('#cust_level').css('color', 'red');
                         $("#cust_level").css("fontSize", "20px");
                         $('#cust_level').val(cust_level);
+                        if (cust_level === "VIP") {
+                            $('#cust_level').addClass('blink').text(cust_level); // ใส่ชื่อ element ที่ต้องการแสดงผลข้อความ
+                        } else {
+                            $('#cust_level').removeClass('blink').text(cust_level);
+                        }
                         $('#group_guest').val(group_guest);
                         $('#phone').val(phone);
                         $('#province_name').val(province_name);
@@ -793,8 +801,6 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                             $('#check_in_status_display').css('color', 'red');
 
                         }
-                        ;
-
                         $('#check_in_status_display').val(check_in_status_display);
                         $('#table_number').css('color', 'blue');
                         $("#table_number").css("fontSize", "30px");
