@@ -55,7 +55,8 @@
                                 <!--span class="label-text">ชื่อ หรือ หมายเลขโทรศัพท์ :</span-->
                                 <span class="contact-error"></span>
                             </label>
-                            <input type="text" id="searchText" name="searchText" placeholder="หมายเลขโทรศัพท์ หรือ ชื่อ "
+                            <input type="text" id="searchText" name="searchText"
+                                   placeholder="หมายเลขโทรศัพท์ หรือ ชื่อ "
                                    class="c-form-name form-control">
                         </div>
                         <!-- ใช้ปุ่มแบบ Bootstrap -->
@@ -82,15 +83,15 @@
 <![endif]-->
 
 <script>
-    $(document).ready(function() {
-        $('#searchButton').on('click', function() {
+    $(document).ready(function () {
+        $('#searchButton').on('click', function () {
             let query = $('#searchText').val();
             if (query.length >= 2) { // ค้นหาหลังจากพิมพ์เกิน 2 ตัวอักษร
                 $.ajax({
                     url: 'search.php',
                     method: 'POST',
                     data: {query: query},
-                    success: function(data) {
+                    success: function (data) {
                         $('#result').html(data);
                     }
                 });
