@@ -171,7 +171,6 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                             <table id='TableRecordList' class='display dataTable'>
                                                 <thead>
                                                 <tr>
-                                                    <th>รหัสลูกค้า</th>
                                                     <th>ชื่อบริษัท/ร้านค้า</th>
                                                     <th>กลุ่ม</th>
                                                     <th>หมายเลขโทรศัพท์</th>
@@ -185,7 +184,6 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                 </thead>
                                                 <tfoot>
                                                 <tr>
-                                                    <th>รหัสลูกค้า</th>
                                                     <th>ชื่อบริษัท/ร้านค้า</th>
                                                     <th>กลุ่ม</th>
                                                     <th>หมายเลขโทรศัพท์</th>
@@ -629,7 +627,6 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                     'data': formData,
                 },
                 'columns': [
-                    {data: 'cust_id'},
                     {data: 'ar_name'},
                     {data: 'group_guest'},
                     {data: 'phone'},
