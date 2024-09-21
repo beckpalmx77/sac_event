@@ -25,7 +25,7 @@ ON
 WHERE 
     v_event_checkin.check_in_status = 'N' 
 ORDER BY 
-    v_event_checkin.update_chk_in_date ";
+    v_event_checkin.table_number ";
 
 $stmt = $conn->prepare($sql_chk);
 $stmt->execute();
