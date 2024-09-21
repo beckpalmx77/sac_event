@@ -53,12 +53,6 @@ include('includes/Header.php');
         #attendee-list tbody tr:nth-child(even) {
             background-color: #f2f2f2;
         }
-
-        /* Add scroll bar with fixed height */
-        #attendee-list {
-            max-height: 400px; /* Adjust this value according to your layout */
-            overflow-y: scroll;
-        }
     </style>
 </head>
 
@@ -78,7 +72,6 @@ include('includes/Header.php');
                             <th style="text-align: left;"><h3 style="color: #0000FF;">ลำดับที่</h3></th>
                             <th style="text-align: left;"><h3 style="color: #0000FF;">ผู้เข้าร่วมงาน</h3></th>
                             <th style="text-align: left;"><h3 style="color: #0000FF;">หมายเลขโต๊ะ</h3></th>
-                            <th style="text-align: left;"><h3 style="color: #0000FF;">กลุ่ม</h3></th>
                             <th style="text-align: left;"><h3 style="color: #0000FF;">จังหวัด</h3></th>
                             <th style="text-align: left;"><h3 style="color: #0000FF;">สถานะเช็คอิน</h3></th>
                             <th style="text-align: left;"><h3 style="color: #0000FF;">เวลาเช็คอิน</h3></th>
@@ -132,23 +125,30 @@ include('includes/Modal-Logout.php');
         }
 
         function displayAttendees(attendees) {
+            const maxRecords = determineMaxRecords(); // กำหนดจำนวน record ตามขนาดหน้าจอ
             const $tbody = $('#attendee-tbody');
             $tbody.empty();
 
-            // Display all attendees without any limit
-            attendees.forEach(function (attendee) {
+            // Limit the attendees to the last records based on the screen size
+            const visibleAttendees = attendees.slice(-maxRecords);
+
+            visibleAttendees.forEach(function (attendee) {
                 $tbody.append(
                     `<tr>
                         <td><H3>${attendee.order_record}</H3></td>
                         <td><H3>${attendee.ar_name}</H3></td>
                         <td><H3>${attendee.table_number}</H3></td>
-                        <td><H3>${attendee.group_guest}</H3></td>
                         <td><H3>${attendee.province_name}</H3></td>
                         <td><H3>${attendee.check_in_status_text}</H3></td>
                         <td><H3>${attendee.update_chk_in_date}</H3></td>
                     </tr>`
                 );
             });
+        }
+
+        function determineMaxRecords() {
+            // ถ้าหน้าจอสูงน้อยกว่า 1000px ให้แสดง 7 record, ถ้าสูงกว่านั้นให้แสดง 1000 record
+            return window.innerHeight < 900 ? 800 : 1000;
         }
 
         // Refresh attendee list every 4 seconds
