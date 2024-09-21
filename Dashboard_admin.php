@@ -402,7 +402,6 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                                         <input type="text" class="form-control"
                                                                                id="register_qty"
                                                                                name="register_qty"
-                                                                               readonly
                                                                                placeholder="">
                                                                     </div>
                                                                     <div class="col-sm-4">
