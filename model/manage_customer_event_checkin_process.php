@@ -200,7 +200,7 @@ if ($_POST["action"] === 'CONFIRM') {
 
                 $access_token = 'Shw8xgMW5E9qSgkqGUykrY+YZLAT+PcaM2pdutHSloNWDPMPqjbfrHUycRoM7txPoGIgVi6rV+7NgZxp3nmtCn6mnazWJCbk/I0++o+JRr/j8HP4qSxCksI1E9LlvVozjmywwOS/gqz8maqOcXrofwdB04t89/1O/w1cDnyilFU=';
                 //Remove // for production
-                send_Message($access_token, $line_user_id, $msg);
+                //send_Message($access_token, $line_user_id, $msg);
 
                 echo $save_success;
 
