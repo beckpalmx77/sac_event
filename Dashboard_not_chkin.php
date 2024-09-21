@@ -66,7 +66,7 @@ include('includes/Header.php');
 
             <div class="container-fluid" id="container-wrapper">
                 <div id="attendee-list">
-                    <div>รายชื่อผู้ที่ยังไม่ลงทะเบียน</div>
+                    <div><b>รายชื่อผู้ที่ยังไม่ลงทะเบียน</b></div>
                     <table id="TableRecordList" class="table" style="border-collapse: collapse;">
                         <thead>
                         <tr>
