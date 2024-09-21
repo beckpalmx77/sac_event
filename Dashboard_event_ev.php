@@ -89,9 +89,9 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                 <thead>
                                                 <tr>
                                                     <th>ชื่อบริษัท/ร้านค้า</th>
+                                                    <th>โต๊ะ</th>
                                                     <th>หมายเลขโทรศัพท์</th>
                                                     <th>กลุ่ม</th>
-                                                    <th>โต๊ะ</th>
                                                     <th>Check In</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -99,9 +99,9 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                 <tfoot>
                                                 <tr>
                                                     <th>ชื่อบริษัท/ร้านค้า</th>
+                                                    <th>โต๊ะ</th>
                                                     <th>หมายเลขโทรศัพท์</th>
                                                     <th>กลุ่ม</th>
-                                                    <th>โต๊ะ</th>
                                                     <th>Check In</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -544,9 +544,9 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                 },
                 'columns': [
                     {data: 'ar_name'},
-                    {data: 'group_guest'},
-                    {data: 'phone'},
                     {data: 'table_number'},
+                    {data: 'phone'},
+                    {data: 'group_guest'},
                     {data: 'check_in_status'},
                     {data: 'detail'}
                 ]
