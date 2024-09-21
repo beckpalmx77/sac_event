@@ -12,7 +12,7 @@ if (isset($_POST['query'])) {
     OR ar_name LIKE :query OR cust_name_1 LIKE :query 
     OR cust_name_2 LIKE :query OR cust_name_3 LIKE :query 
     OR cust_name_4 LIKE :query OR cust_name_5 LIKE :query OR cust_name_6 LIKE :query
-    OR nickname LIKE :query ");
+    OR nickname LIKE :query OR table_number LIKE :query");
     $stmt->execute(['query' => "%$query%"]);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
