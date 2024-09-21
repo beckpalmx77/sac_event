@@ -78,6 +78,7 @@ include('includes/Header.php');
                             <th style="text-align: left;"><h3 style="color: #0000FF;">ลำดับที่</h3></th>
                             <th style="text-align: left;"><h3 style="color: #0000FF;">ผู้เข้าร่วมงาน</h3></th>
                             <th style="text-align: left;"><h3 style="color: #0000FF;">หมายเลขโต๊ะ</h3></th>
+                            <th style="text-align: left;"><h3 style="color: #0000FF;">กลุ่ม</h3></th>
                             <th style="text-align: left;"><h3 style="color: #0000FF;">จังหวัด</h3></th>
                             <th style="text-align: left;"><h3 style="color: #0000FF;">สถานะเช็คอิน</h3></th>
                             <th style="text-align: left;"><h3 style="color: #0000FF;">เวลาเช็คอิน</h3></th>
@@ -141,6 +142,7 @@ include('includes/Modal-Logout.php');
                         <td><H3>${attendee.order_record}</H3></td>
                         <td><H3>${attendee.ar_name}</H3></td>
                         <td><H3>${attendee.table_number}</H3></td>
+                        <td><H3>${attendee.group_guest}</H3></td>
                         <td><H3>${attendee.province_name}</H3></td>
                         <td><H3>${attendee.check_in_status_text}</H3></td>
                         <td><H3>${attendee.update_chk_in_date}</H3></td>
