@@ -39,7 +39,7 @@
                 <div class="c-form-top">
                     <div class="c-form-top-left">
                         <h3>ค้นหาข้อมูล เข้าร่วมงาน</h3>
-                        <p>กรอก หมายเลขโทรศัพท์ เพื่อค้นหาข้อมูล</p>
+                        <p>กรอก หมายเลขโทรศัพท์ หรือ ชื่อ เพื่อค้นหาข้อมูล</p>
                     </div>
                     <div class="c-form-top-right">
                         <div class="c-form-top-right-icon">
@@ -55,7 +55,7 @@
                                 <!--span class="label-text">ชื่อ หรือ หมายเลขโทรศัพท์ :</span-->
                                 <span class="contact-error"></span>
                             </label>
-                            <input type="text" id="searchText" name="searchText" placeholder="หมายเลขโทรศัพท์"
+                            <input type="text" id="searchText" name="searchText" placeholder="หมายเลขโทรศัพท์ หรือ ชื่อ "
                                    class="c-form-name form-control">
                         </div>
                         <!-- ใช้ปุ่มแบบ Bootstrap -->
