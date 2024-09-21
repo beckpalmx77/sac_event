@@ -147,8 +147,8 @@ include('includes/Modal-Logout.php');
         }
 
         function determineMaxRecords() {
-            // ถ้าหน้าจอสูงน้อยกว่า 1000px ให้แสดง 7 record, ถ้าสูงกว่านั้นให้แสดง 10 record
-            return window.innerHeight < 900 ? 7 : 10;
+            // ถ้าหน้าจอสูงน้อยกว่า 1000px ให้แสดง 7 record, ถ้าสูงกว่านั้นให้แสดง 1000 record
+            return window.innerHeight < 900 ? 800 : 1000;
         }
 
         // Refresh attendee list every 4 seconds
