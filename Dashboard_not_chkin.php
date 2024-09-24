@@ -75,7 +75,6 @@ include('includes/Header.php');
                             <th style="text-align: left;"><h3 style="color: #0000FF;">หมายเลขโต๊ะ</h3></th>
                             <th style="text-align: left;"><h3 style="color: #0000FF;">จังหวัด</h3></th>
                             <th style="text-align: left;"><h3 style="color: #0000FF;">สถานะเช็คอิน</h3></th>
-                            <th style="text-align: left;"><h3 style="color: #0000FF;">เวลาเช็คอิน</h3></th>
                         </tr>
                         </thead>
                         <tbody id="attendee-tbody">
@@ -141,7 +140,6 @@ include('includes/Modal-Logout.php');
                         <td><H3>${attendee.table_number}</H3></td>
                         <td><H3>${attendee.province_name}</H3></td>
                         <td><H3>${attendee.check_in_status_text}</H3></td>
-                        <td><H3>${attendee.update_chk_in_date}</H3></td>
                     </tr>`
                 );
             });
