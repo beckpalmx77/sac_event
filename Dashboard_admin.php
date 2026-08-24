@@ -435,14 +435,14 @@ if (strlen($_SESSION['alogin']) == "" || strlen($_SESSION['department_id']) == "
                                                         <div class="modal-footer">
                                                             <input type="hidden" name="id" id="id"/>
                                                             <input type="hidden" name="action" id="action" value=""/>
-                                                            <button type="button" id="DetailButton" name="DetailButton"
+                                                            <!--button type="button" id="DetailButton" name="DetailButton"
                                                                     class="btn btn-success">Update <i
                                                                         class="fa fa-check"></i>
                                                             </button>
                                                             <button type="button" id="printButton" name="printButton"
                                                                     class="btn btn-info">Print <i
                                                                         class="fa fa-print"></i>
-                                                            </button>
+                                                            </button-->
 
                                                             <span class="icon-input-btn">
                                                                 <i class="fa fa-check"></i>

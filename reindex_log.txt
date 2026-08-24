@@ -1,0 +1,36 @@
+SAC Event - Database Optimization Log
+Date: 2026-08-24 11:39:12
+============================================================
+[OK] `afront_contact`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `amphures`: สำเร็จ [InnoDB] [0.08 MB -> 0.08 MB] ลดไป: 0 MB
+[OK] `districts`: สำเร็จ [InnoDB] [1.52 MB -> 1.52 MB] ลดไป: 0 MB
+[OK] `evs_customer`: สำเร็จ [InnoDB] [0.11 MB -> 0.11 MB] ลดไป: 0 MB
+[OK] `evs_event_checkin`: สำเร็จ [InnoDB] [0.13 MB -> 0.11 MB] ลดไป: 0.02 MB
+[OK] `evs_event_master`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `evs_lucky_draw`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `evs_lucky_draw_award`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `evs_sale_name`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `geographies`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `ims_branch`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `ims_brand`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `ims_day`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `ims_event`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `ims_month`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `ims_permission`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `ims_status`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `ims_user`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `mdepartment`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `menu_main`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `menu_sub`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `mpermission`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `mstatus`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `muser_account`: สำเร็จ [InnoDB] [0.02 MB -> 0.02 MB] ลดไป: 0 MB
+[OK] `provinces`: สำเร็จ [InnoDB] [0.05 MB -> 0.05 MB] ลดไป: 0 MB
+
+------------------------------------------------------------
+สรุปผลการทำงาน:
+ - สำเร็จ: 25 ตาราง
+ - ผิดพลาด: 0 ตาราง
+ - พื้นที่ที่ประหยัดได้: 0.02 MB
+ - ใช้เวลาทั้งหมด: 100.3 วินาที
+============================================================
